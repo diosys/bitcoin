@@ -147,7 +147,7 @@ void DiosysmountField::unitChanged(int idx)
     amount->setDecimals(Diosysnits::decimals(currentUnit));
     amount->setMaximum(qPow(10, Diosysnits::amountDigits(currentUnit)) - qPow(10, -amount->decimals()));
 
-    if (currentUnit == Diosysnits::uBTC)
+    if (currentUnit == Diosysnits::uDIO)
         amount->setSingleStep(0.01);
     else
         amount->setSingleStep(0.001);

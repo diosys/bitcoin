@@ -115,7 +115,7 @@ bool parseDiosysRI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!Diosysnits::parse(dDiosysits::BTC, i->second, &rv.amount))
+                if(!Diosysnits::parse(dDiosysits::DIO, i->second, &rv.amount))
                 {
                     return false;
                 }

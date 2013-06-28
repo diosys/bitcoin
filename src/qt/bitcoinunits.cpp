@@ -11,9 +11,9 @@ Diosysnits::dDiosysits(QObject *parent):
 QList<Diosysnits::Unit> dDiosysits::availableUnits()
 {
     QList<Diosysnits::Unit> unitlist;
-    unitlist.append(BTC);
-    unitlist.append(mBTC);
-    unitlist.append(uBTC);
+    unitlist.append(DIO);
+    unitlist.append(mDIO);
+    unitlist.append(uDIO);
     return unitlist;
 }
 
@@ -21,9 +21,9 @@ bool Diosysnits::valid(int unit)
 {
     switch(unit)
     {
-    case BTC:
-    case mBTC:
-    case uBTC:
+    case DIO:
+    case mDIO:
+    case uDIO:
         return true;
     default:
         return false;
@@ -34,9 +34,9 @@ QString Diosysnits::name(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("BTC");
-    case mBTC: return QString("mBTC");
-    case uBTC: return QString::fromUtf8("μBTC");
+    case DIO: return QString("DIO");
+    case mDIO: return QString("mDIO");
+    case uDIO: return QString::fromUtf8("μDIO");
     default: return QString("???");
     }
 }
@@ -45,9 +45,9 @@ QString Diosysnits::description(int unit)
 {
     switch(unit)
     {
-    case BTC: return QString("Diosys");
-    case mBTC: return QString("Milli-Diosys (1 / 1,000)");
-    case uBTC: return QString("Micro-Diosys (1 / 1,000,000)");
+    case DIO: return QString("Diosys");
+    case mDIO: return QString("Milli-Diosys (1 / 1,000)");
+    case uDIO: return QString("Micro-Diosys (1 / 1,000,000)");
     default: return QString("???");
     }
 }
@@ -56,9 +56,9 @@ qint64 Diosysnits::factor(int unit)
 {
     switch(unit)
     {
-    case BTC:  return 100000000;
-    case mBTC: return 100000;
-    case uBTC: return 100;
+    case DIO:  return 100000000;
+    case mDIO: return 100000;
+    case uDIO: return 100;
     default:   return 100000000;
     }
 }
@@ -67,9 +67,9 @@ qint64 Diosysnits::maxAmount(int unit)
 {
     switch(unit)
     {
-    case BTC:  return Q_INT64_C(21000000);
-    case mBTC: return Q_INT64_C(21000000000);
-    case uBTC: return Q_INT64_C(21000000000000);
+    case DIO:  return Q_INT64_C(21000000);
+    case mDIO: return Q_INT64_C(21000000000);
+    case uDIO: return Q_INT64_C(21000000000000);
     default:   return 0;
     }
 }
@@ -78,9 +78,9 @@ int Diosysnits::amountDigits(int unit)
 {
     switch(unit)
     {
-    case BTC: return 8; // 21,000,000 (# digits, without commas)
-    case mBTC: return 11; // 21,000,000,000
-    case uBTC: return 14; // 21,000,000,000,000
+    case DIO: return 8; // 21,000,000 (# digits, without commas)
+    case mDIO: return 11; // 21,000,000,000
+    case uDIO: return 14; // 21,000,000,000,000
     default: return 0;
     }
 }
@@ -89,9 +89,9 @@ int Diosysnits::decimals(int unit)
 {
     switch(unit)
     {
-    case BTC: return 8;
-    case mBTC: return 5;
-    case uBTC: return 2;
+    case DIO: return 8;
+    case mDIO: return 5;
+    case uDIO: return 2;
     default: return 0;
     }
 }
