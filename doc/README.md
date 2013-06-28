@@ -1,17 +1,16 @@
-Bitcoin 0.8.2 BETA
+Diosys 0.8.2 BETA 
 ====================
 
-Copyright (c) 2009-2013 Bitcoin Developers
+Copyright (c) 2009-2013 Diosys Developers
 
-Distributed under the MIT/X11 software license, see the accompanying
-file COPYING or http://www.opensource.org/licenses/mit-license.php.
+Distributed under the [MIT/X11 software license](http://www.opensource.org/licenses/mit-license.php).
 This product includes software developed by the OpenSSL Project for use in the [OpenSSL Toolkit](http://www.openssl.org/). This product includes
 cryptographic software written by Eric Young ([eay@cryptsoft.com](mailto:eay@cryptsoft.com)), and UPnP software written by Thomas Bernard.
 
 
 Intro
 ---------------------
-Bitcoin is a free open source peer-to-peer electronic cash system that is
+Diosys is a free open source peer-to-peer electronic cash system that is
 completely decentralized, without the need for a central server or trusted
 parties.  Users hold the crypto keys to their own money and transact directly
 with each other, with the help of a P2P network to check for double-spending.
@@ -19,28 +18,53 @@ with each other, with the help of a P2P network to check for double-spending.
 
 Setup
 ---------------------
-You need the Qt4 run-time libraries to run Bitcoin-Qt. On Debian or Ubuntu:
-	`sudo apt-get install libqtgui4`
+[Diosys-Qt](http://diosys.org/en/download) is the original Diosys client and it builds the backbone of the network. However, it downloads and stores the entire history of Diosys transactions; depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
+
+### Unix
+
+You need the Qt4 run-time libraries to run Diosys-Qt. On Debian or Ubuntu:
+
+	sudo apt-get install libqtgui4
 
 Unpack the files into a directory and run:
 
-- bin/32/bitcoin-qt (GUI, 32-bit)
-- bin/32/bitcoind (headless, 32-bit)
-- bin/64/bitcoin-qt (GUI, 64-bit)
-- bin/64/bitcoind (headless, 64-bit)
+- bin/32/diosys-qt (GUI, 32-bit)
+- bin/32/diosysd (headless, 32-bit)
+- bin/64/diosys-qt (GUI, 64-bit)
+- bin/64/diosysd (headless, 64-bit)
 
-See the documentation at the [Bitcoin Wiki](https://en.bitcoin.it/wiki/Main_Page)
+
+
+### Windows
+
+Unpack the files into a directory and run diosys-qt.exe.
+
+### Need Help?
+
+* See the documentation at the [Diosys Wiki](https://en.diosys.it/wiki/Main_Page)
 for help and more information.
+* Ask for help on [#diosys](http://webchat.freenode.net?channels=diosys) on Freenode. If you don't have an IRC client use [webchat here](http://webchat.freenode.net?channels=diosys).
+* Ask for help on the [DiosysTalk](https://diosystalk.org/) forums.
 
+Building
+---------------------
+- [Diosys-Qt Readme](readme-qt.md)
+- [OSX Build Notes](build-osx.md)
+- [Unix Build Notes](build-unix.md)
+- [Windows Build Notes](build-msw.md)
+
+Development
+---------------------
+- [Coding Guidelines](coding.md)
+- [Multiwallet Qt Development](multiwallet-qt.md)
+- [Release Notes](release-notes.md)
+- [Release Process](release-process.md)
+- [Source Code Documentation (External Link)](https://dev.visucore.com/diosys/doxygen/)
+- [Translation Process](translation_process.md)
+- [Unit Tests](unit-tests.md)
 
 Other Pages
 ---------------------
-- [Unix Build Notes](build-unix.md)
-- [OSX Build Notes](build-osx.md)
-- [Windows Build Notes](build-msw.md)
-- [Coding Guidelines](coding.md)
-- [Release Process](release-process.md)
-- [Release Notes](release-notes.md)
-- [Multiwallet Qt Development](multiwallet-qt.md)
-- [Unit Tests](unit-tests.md)
-- [Translation Process](translation_process.md)
+- [Assets Attribution](assets-attribution.md)
+- [Files](files.md)
+- [Tor Support](tor.md)

@@ -1,17 +1,17 @@
 /*
- * Qt4 bitcoin GUI.
+ * Qt4 diosysGUI.
  *
  * W.J. van der Laan 2011-2012
- * The Bitcoin Developers 2011-2013
+ * The DiosysDevelopers 2011-2013
  */
 #include "walletframe.h"
-#include "bitcoingui.h"
+#include "diosysui.h"
 #include "walletstack.h"
 
 #include <QHBoxLayout>
 #include <QMessageBox>
 
-WalletFrame::WalletFrame(BitcoinGUI *_gui) :
+WalletFrame::WalletFrame(DiosysUI *_gui) :
     QFrame(_gui),
     gui(_gui),
     clientModel(0)
@@ -20,7 +20,7 @@ WalletFrame::WalletFrame(BitcoinGUI *_gui) :
     QHBoxLayout *walletFrameLayout = new QHBoxLayout(this);
     setContentsMargins(0,0,0,0);
     walletStack = new WalletStack(this);
-    walletStack->setBitcoinGUI(gui);
+    walletStack->setDiosysUI(gui);
     walletFrameLayout->setContentsMargins(0,0,0,0);
     walletFrameLayout->addWidget(walletStack);
 }

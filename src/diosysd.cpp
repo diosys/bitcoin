@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2012 The Diosys developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -47,12 +47,12 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to diosysd / RPC client
-            std::string strUsage = _("diosys version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("Diosys version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  diosys [options]                     " + "\n" +
-                  "  diosys [options] <command> [params]  " + _("Send command to -server or diosysd") + "\n" +
-                  "  diosys [options] help                " + _("List commands") + "\n" +
-                  "  diosys [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  diosysd [options]                     " + "\n" +
+                  "  diosysd [options] <command> [params]  " + _("Send command to -server or diosysd") + "\n" +
+                  "  diosysd [options] help                " + _("List commands") + "\n" +
+                  "  diosysd [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 
@@ -67,6 +67,10 @@ bool AppInit(int argc, char* argv[])
 
         if (fCommandLine)
         {
+            if (!SelectParamsFromCommandLine()) {
+                fprintf(stderr, "Error: invalid combination of -regtest and -testnet.\n");
+                return false;
+            }
             int ret = CommandLineRPC(argc, argv);
             exit(ret);
         }

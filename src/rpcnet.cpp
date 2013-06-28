@@ -1,4 +1,4 @@
-// Copyright (c) 2009-2012 Bitcoin Developers
+// Copyright (c) 2009-2012 Diosys Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -157,7 +157,7 @@ Value getaddednodeinfo(const Array& params, bool fHelp)
     BOOST_FOREACH(string& strAddNode, laddedNodes)
     {
         vector<CService> vservNode(0);
-        if(Lookup(strAddNode.c_str(), vservNode, GetDefaultPort(), fNameLookup, 0))
+        if(Lookup(strAddNode.c_str(), vservNode, Params().GetDefaultPort(), fNameLookup, 0))
             laddedAddreses.push_back(make_pair(strAddNode, vservNode));
         else
         {

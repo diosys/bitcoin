@@ -79,13 +79,13 @@ OBJS= \
     obj/key.o \
     obj/db.o \
     obj/init.o \
-    obj/bitcoind.o \
+    obj/diosysd.o \
     obj/keystore.o \
     obj/core.o \
     obj/main.o \
     obj/net.o \
     obj/protocol.o \
-    obj/bitcoinrpc.o \
+    obj/diosysrpc.o \
     obj/rpcdump.o \
     obj/rpcnet.o \
     obj/rpcmining.o \
@@ -101,13 +101,14 @@ OBJS= \
     obj/bloom.o \
     obj/noui.o \
     obj/leveldb.o \
-    obj/txdb.o
+    obj/txdb.o \
+    obj/chainparams.o
 
 
-all: bitcoind.exe
+all: diosysd.exe
 
-test check: test_bitcoin.exe FORCE
-	test_bitcoin.exe
+test check: test_diosys.exe FORCE
+	test_diosys.exe
 
 #
 # LevelDB support
@@ -121,7 +122,7 @@ leveldb/libleveldb.a:
 obj/%.o: %.cpp $(HEADERS)
 	$(CXX) -c $(CFLAGS) -o $@ $<
 
-bitcoind.exe: $(OBJS:obj/%=obj/%)
+diosysd.exe: $(OBJS:obj/%=obj/%)
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ $(LIBS)
 
 TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
@@ -129,11 +130,11 @@ TESTOBJS := $(patsubst test/%.cpp,obj-test/%.o,$(wildcard test/*.cpp))
 obj-test/%.o: test/%.cpp $(HEADERS)
 	$(CXX) -c $(TESTDEFS) $(CFLAGS) -o $@ $<
 
-test_bitcoin.exe: $(TESTOBJS) $(filter-out obj/init.o obj/bitcoind.o,$(OBJS:obj/%=obj/%))
+test_diosys.exe: $(TESTOBJS) $(filter-out obj/init.o obj/diosysd.o,$(OBJS:obj/%=obj/%))
 	$(CXX) $(CFLAGS) $(LDFLAGS) -o $@ $(LIBPATHS) $^ -lboost_unit_test_framework$(BOOST_SUFFIX) $(LIBS)
 
 clean:
-	rm -f bitcoind.exe test_bitcoin.exe
+	rm -f diosysd.exe test_diosys.exe
 	rm -f obj/*
 	rm -f obj-test/*
 	cd leveldb && $(MAKE) TARGET_OS=NATIVE_WINDOWS clean && cd ..

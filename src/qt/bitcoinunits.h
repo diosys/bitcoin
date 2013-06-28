@@ -1,21 +1,21 @@
-#ifndef BITCOINUNITS_H
-#define BITCOINUNITS_H
+#ifndef DIOSYSNITS_H
+#define DIOSYSNITS_H
 
 #include <QString>
 #include <QAbstractListModel>
 
-/** Bitcoin unit definitions. Encapsulates parsing and formatting
+/** Diosysunit definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes.
 */
-class BitcoinUnits: public QAbstractListModel
+class Diosysnits: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit BitcoinUnits(QObject *parent);
+    explicit Diosysnits(QObject *parent);
 
-    /** Bitcoin units.
-      @note Source: https://en.bitcoin.it/wiki/Units . Please add only sensible ones
+    /** Diosysunits.
+      @note Source: https://en.diosysit/wiki/Units . Please add only sensible ones
      */
     enum Unit
     {
@@ -38,6 +38,8 @@ public:
     static QString description(int unit);
     //! Number of Satoshis (1e-8) per unit
     static qint64 factor(int unit);
+    //! Max amount per unit
+    static qint64 maxAmount(int unit);
     //! Number of amount digits (to represent max number of coins)
     static int amountDigits(int unit);
     //! Number of decimals left
@@ -62,8 +64,8 @@ public:
     ///@}
 
 private:
-    QList<BitcoinUnits::Unit> unitlist;
+    QList<Diosysnits::Unit> unitlist;
 };
-typedef BitcoinUnits::Unit BitcoinUnit;
+typedef Diosysnits::Unit dDiosysit;
 
-#endif // BITCOINUNITS_H
+#endif // DIOSYSNITS_H

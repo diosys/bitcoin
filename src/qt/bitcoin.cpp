@@ -4,7 +4,7 @@
 
 #include <QApplication>
 
-#include "bitcoingui.h"
+#include "diosysui.h"
 #include "clientmodel.h"
 #include "walletmodel.h"
 #include "optionsmodel.h"
@@ -25,8 +25,8 @@
 #include <QTranslator>
 #include <QLibraryInfo>
 
-#if defined(BITCOIN_NEED_QT_PLUGINS) && !defined(_BITCOIN_QT_PLUGINS_INCLUDED)
-#define _BITCOIN_QT_PLUGINS_INCLUDED
+#if defined(DIOSYSNEED_QT_PLUGINS) && !defined(_dDIOSYST_PLUGINS_INCLUDED)
+#define _DIOSYSQT_PLUGINS_INCLUDED
 #define __INSURE__
 #include <QtPlugin>
 Q_IMPORT_PLUGIN(qcncodecs)
@@ -40,7 +40,7 @@ Q_IMPORT_PLUGIN(qtaccessiblewidgets)
 Q_DECLARE_METATYPE(bool*)
 
 // Need a global reference for the notifications to find the GUI
-static BitcoinGUI *guiref;
+static DiosysUI *guiref;
 static SplashScreen *splashref;
 
 static bool ThreadSafeMessageBox(const std::string& message, const std::string& caption, unsigned int style)
@@ -98,7 +98,7 @@ static void InitMessage(const std::string &message)
  */
 static std::string Translate(const char* psz)
 {
-    return QCoreApplication::translate("bitcoin-core", psz).toStdString();
+    return QCoreApplication::translate("diosyscore", psz).toStdString();
 }
 
 /* Handle runaway exceptions. Shows a message box with the problem and quits the program.
@@ -106,11 +106,11 @@ static std::string Translate(const char* psz)
 static void handleRunawayException(std::exception *e)
 {
     PrintExceptionContinue(e, "Runaway exception");
-    QMessageBox::critical(0, "Runaway exception", BitcoinGUI::tr("A fatal error occurred. Bitcoin can no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
+    QMessageBox::critical(0, "Runaway exception", DiosysUI::tr("A fatal error occurred. dDiosysan no longer continue safely and will quit.") + QString("\n\n") + QString::fromStdString(strMiscWarning));
     exit(1);
 }
 
-#ifndef BITCOIN_QT_TEST
+#ifndef DIOSYSQT_TEST
 int main(int argc, char *argv[])
 {
     fHaveGUI = true;
@@ -124,7 +124,7 @@ int main(int argc, char *argv[])
     QTextCodec::setCodecForCStrings(QTextCodec::codecForTr());
 #endif
 
-    Q_INIT_RESOURCE(bitcoin);
+    Q_INIT_RESOURCE(diosys;
     QApplication app(argc, argv);
 
     // Register meta types used for QMetaObject::invokeMethod
@@ -139,12 +139,12 @@ int main(int argc, char *argv[])
     // Install global event filter that makes sure that long tooltips can be word-wrapped
     app.installEventFilter(new GUIUtil::ToolTipToRichTextFilter(TOOLTIP_WRAP_THRESHOLD, &app));
 
-    // ... then bitcoin.conf:
+    // ... then diosysconf:
     if (!boost::filesystem::is_directory(GetDataDir(false)))
     {
         // This message can not be translated, as translation is not initialized yet
-        // (which not yet possible because lang=XX can be overridden in bitcoin.conf in the data directory)
-        QMessageBox::critical(0, "Bitcoin",
+        // (which not yet possible because lang=XX can be overridden in diosysconf in the data directory)
+        QMessageBox::critical(0, "Diosys,
                               QString("Error: Specified data directory \"%1\" does not exist.").arg(QString::fromStdString(mapArgs["-datadir"])));
         return 1;
     }
@@ -152,12 +152,12 @@ int main(int argc, char *argv[])
 
     // Application identification (must be set before OptionsModel is initialized,
     // as it is used to locate QSettings)
-    QApplication::setOrganizationName("Bitcoin");
-    QApplication::setOrganizationDomain("bitcoin.org");
+    QApplication::setOrganizationName("Diosys);
+    QApplication::setOrganizationDomain("diosysorg");
     if (GetBoolArg("-testnet", false)) // Separate UI settings for testnet
-        QApplication::setApplicationName("Bitcoin-Qt-testnet");
+        QApplication::setApplicationName("DiosysQt-testnet");
     else
-        QApplication::setApplicationName("Bitcoin-Qt");
+        QApplication::setApplicationName("DiosysQt");
 
     // ... then GUI settings:
     OptionsModel optionsModel;
@@ -181,11 +181,11 @@ int main(int argc, char *argv[])
     if (qtTranslator.load("qt_" + lang_territory, QLibraryInfo::location(QLibraryInfo::TranslationsPath)))
         app.installTranslator(&qtTranslator);
 
-    // Load e.g. bitcoin_de.qm (shortcut "de" needs to be defined in bitcoin.qrc)
+    // Load e.g. diosysde.qm (shortcut "de" needs to be defined in ddiosysrc)
     if (translatorBase.load(lang, ":/translations/"))
         app.installTranslator(&translatorBase);
 
-    // Load e.g. bitcoin_de_DE.qm (shortcut "de_DE" needs to be defined in bitcoin.qrc)
+    // Load e.g. diosysde_DE.qm (shortcut "de_DE" needs to be defined in ddiosysrc)
     if (translator.load(lang_territory, ":/translations/"))
         app.installTranslator(&translator);
 
@@ -226,7 +226,7 @@ int main(int argc, char *argv[])
 
         boost::thread_group threadGroup;
 
-        BitcoinGUI window(GetBoolArg("-testnet", false), 0);
+        DiosysUI window(GetBoolArg("-testnet", false), 0);
         guiref = &window;
 
         QTimer* pollShutdownTimer = new QTimer(guiref);
@@ -262,7 +262,7 @@ int main(int argc, char *argv[])
                 }
 
                 // Now that initialization/startup is done, process any command-line
-                // bitcoin: URIs
+                // diosys URIs
                 QObject::connect(paymentServer, SIGNAL(receivedURI(QString)), &window, SLOT(handleURI(QString)));
                 QTimer::singleShot(100, paymentServer, SLOT(uiReady()));
 
@@ -273,7 +273,7 @@ int main(int argc, char *argv[])
                 window.removeAllWallets();
                 guiref = 0;
             }
-            // Shutdown the core and its threads, but don't exit Bitcoin-Qt here
+            // Shutdown the core and its threads, but don't exit DiosysQt here
             threadGroup.interrupt_all();
             threadGroup.join_all();
             Shutdown();
@@ -292,4 +292,4 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
-#endif // BITCOIN_QT_TEST
+#endif // DIOSYSQT_TEST

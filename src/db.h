@@ -1,9 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2012 The Diosys developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_DB_H
-#define BITCOIN_DB_H
+#ifndef DIOSYS_DB_H
+#define DIOSYS_DB_H
 
 #include "sync.h"
 #include "serialize.h"
@@ -318,14 +318,10 @@ class CAddrDB
 {
 private:
     boost::filesystem::path pathAddr;
-    static unsigned char pchMessageStart[4];
-
 public:
     CAddrDB();
     bool Write(const CAddrMan& addr);
     bool Read(CAddrMan& addr);
-
-    static void SetMessageStart(unsigned char _pchMessageStart[]) { memcpy(CAddrDB::pchMessageStart, _pchMessageStart, sizeof(CAddrDB::pchMessageStart)); }
 };
 
-#endif // BITCOIN_DB_H
+#endif // DIOSYS_DB_H

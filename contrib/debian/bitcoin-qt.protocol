@@ -1,6 +1,6 @@
 [Protocol]
-exec=bitcoin-qt '%u'
-protocol=bitcoin
+exec=diosys-qt '%u'
+protocol=diosys
 input=none
 output=none
 helper=true

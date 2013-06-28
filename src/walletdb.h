@@ -1,9 +1,9 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2012 The Diosys developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_WALLETDB_H
-#define BITCOIN_WALLETDB_H
+#ifndef DIOSYS_WALLETDB_H
+#define DIOSYS_WALLETDB_H
 
 #include "db.h"
 #include "base58.h"
@@ -30,7 +30,7 @@ class CKeyMetadata
 public:
     static const int CURRENT_VERSION=1;
     int nVersion;
-    int64 nCreateTime;
+    int64 nCreateTime; // 0 means unknown
 
     CKeyMetadata()
     {
@@ -52,7 +52,7 @@ public:
     void SetNull()
     {
         nVersion = CKeyMetadata::CURRENT_VERSION;
-        nCreateTime = GetTime();
+        nCreateTime = 0;
     }
 };
 
@@ -84,13 +84,12 @@ public:
     }
 
     bool WriteKey(const CPubKey& vchPubKey, const CPrivKey& vchPrivKey,
-                  int64 nCreateTime)
+                  const CKeyMetadata &keyMeta)
     {
         nWalletDBUpdated++;
 
-        CKeyMetadata keyMeta(nCreateTime);
         if (!Write(std::make_pair(std::string("keymeta"), vchPubKey),
-                   keyMeta, false))
+                   keyMeta))
             return false;
 
         return Write(std::make_pair(std::string("key"), vchPubKey), vchPrivKey, false);
@@ -98,14 +97,13 @@ public:
 
     bool WriteCryptedKey(const CPubKey& vchPubKey,
                          const std::vector<unsigned char>& vchCryptedSecret,
-                         int64 nCreateTime)
+                         const CKeyMetadata &keyMeta)
     {
         const bool fEraseUnencryptedKey = true;
         nWalletDBUpdated++;
 
-        CKeyMetadata keyMeta(nCreateTime);
         if (!Write(std::make_pair(std::string("keymeta"), vchPubKey),
-                   keyMeta, false))
+                   keyMeta))
             return false;
 
         if (!Write(std::make_pair(std::string("ckey"), vchPubKey), vchCryptedSecret, false))
@@ -211,4 +209,4 @@ public:
 
 bool BackupWallet(const CWallet& wallet, const std::string& strDest);
 
-#endif // BITCOIN_WALLETDB_H
+#endif // DIOSYS_WALLETDB_H

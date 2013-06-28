@@ -1,8 +1,8 @@
 /*
- * Qt4 bitcoin GUI.
+ * Qt4 diosysGUI.
  *
  * W.J. van der Laan 2011-2012
- * The Bitcoin Developers 2011-2013
+ * The DiosysDevelopers 2011-2013
  */
 #ifndef WALLETSTACK_H
 #define WALLETSTACK_H
@@ -11,7 +11,7 @@
 #include <QMap>
 #include <boost/shared_ptr.hpp>
 
-class BitcoinGUI;
+class DiosysUI;
 class TransactionTableModel;
 class ClientModel;
 class WalletModel;
@@ -45,7 +45,7 @@ public:
     explicit WalletStack(QWidget *parent = 0);
     ~WalletStack();
 
-    void setBitcoinGUI(BitcoinGUI *gui) { this->gui = gui; }
+    void setDiosysUI(dDiosysI *gui) { this->gui = gui; }
 
     void setClientModel(ClientModel *clientModel) { this->clientModel = clientModel; }
 
@@ -59,7 +59,7 @@ public:
     void showOutOfSyncWarning(bool fShow);
 
 private:
-    BitcoinGUI *gui;
+    DiosysUI *gui;
     ClientModel *clientModel;
     QMap<QString, WalletView*> mapWalletViews;
 

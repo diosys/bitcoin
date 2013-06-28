@@ -1,11 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
+// Copyright (c) 2009-2012 The Diosys developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "init.h"
 #include "main.h"
 #include "core.h"
+#include "chainparams.h"
 #include "txdb.h"
 #include "walletdb.h"
 #include "diosysrpc.h"
@@ -102,7 +103,7 @@ void Shutdown()
     StopRPCThreads();
     ShutdownRPCMining();
     bitdb.Flush(false);
-    GenerateDios(false, NULL);
+    GenerateDiosyss(false, NULL);
     StopNode();
     {
         LOCK(cs_main);
@@ -118,7 +119,7 @@ void Shutdown()
     }
     bitdb.Flush(true);
     boost::filesystem::remove(GetPidFile());
-    UnregisterWallet(pwalletMain);
+    UnregisterAllWallets();
     delete pwalletMain;
 }
 
@@ -165,7 +166,7 @@ std::string HelpMessage()
     string strUsage = _("Options:") + "\n";
     strUsage += "  -?                     " + _("This help message") + "\n";
     strUsage += "  -conf=<file>           " + _("Specify configuration file (default: diosys.conf)") + "\n";
-    strUsage += "  -pid=<file>            " + _("Specify pid file (default: diosys.pid)") + "\n";
+    strUsage += "  -pid=<file>            " + _("Specify pid file (default: diosysd.pid)") + "\n";
     strUsage += "  -gen                   " + _("Generate coins (default: 0)") + "\n";
     strUsage += "  -datadir=<dir>         " + _("Specify data directory") + "\n";
     strUsage += "  -dbcache=<n>           " + _("Set database cache size in megabytes (default: 25)") + "\n";
@@ -210,6 +211,8 @@ std::string HelpMessage()
     strUsage += "  -logtimestamps         " + _("Prepend debug output with timestamp") + "\n";
     strUsage += "  -shrinkdebugfile       " + _("Shrink debug.log file on client startup (default: 1 when no -debug)") + "\n";
     strUsage += "  -printtoconsole        " + _("Send trace/debug info to console instead of debug.log file") + "\n";
+    strUsage += "  -regtest               " + _("Enter regression test mode, which uses a special chain in which blocks can be "
+                                                "solved instantly. This is intended for regression testing tools and app development.") + "\n";
 #ifdef WIN32
     strUsage += "  -printtodebugger       " + _("Send trace/debug info to debugger") + "\n";
 #endif
@@ -366,8 +369,10 @@ bool AppInit2(boost::thread_group& threadGroup)
 
     // ********************************************************* Step 2: parameter interactions
 
-    fTestNet = GetBoolArg("-testnet", false);
     Checkpoints::fEnabled = GetBoolArg("-checkpoints", true);
+    if (!SelectParamsFromCommandLine()) {
+        return InitError("Invalid combination of -testnet and -regtest.");
+    }
 
     if (mapArgs.count("-bind")) {
         // when specifying an explicit binding address, you want to listen on it
@@ -572,7 +577,7 @@ bool AppInit2(boost::thread_group& threadGroup)
     // ********************************************************* Step 6: network initialization
 
     RegisterNodeSignals(GetNodeSignals());
- 
+
     int nSocksVersion = GetArg("-socks", 5);
     if (nSocksVersion != 4 && nSocksVersion != 5)
         return InitError(strprintf(_("Unknown -socks proxy version requested: %i"), nSocksVersion));
@@ -744,20 +749,21 @@ bool AppInit2(boost::thread_group& threadGroup)
                 if (!mapBlockIndex.empty() && pindexGenesisBlock == NULL)
                     return InitError(_("Incorrect or no genesis block found. Wrong datadir for network?"));
 
-                // Check for changed -txindex state (only necessary if we are not reindexing anyway)
-                if (!fReindex && fTxIndex != GetBoolArg("-txindex", false)) {
-                    strLoadError = _("You need to rebuild the database using -reindex to change -txindex");
-                    break;
-                }
-
                 // Initialize the block index (no-op if non-empty database was already loaded)
                 if (!InitBlockIndex()) {
                     strLoadError = _("Error initializing block database");
                     break;
                 }
 
+                // Check for changed -txindex state
+                if (fTxIndex != GetBoolArg("-txindex", false)) {
+                    strLoadError = _("You need to rebuild the database using -reindex to change -txindex");
+                    break;
+                }
+
                 uiInterface.InitMessage(_("Verifying blocks..."));
-                if (!VerifyDB()) {
+                if (!VerifyDB(GetArg("-checklevel", 3),
+                              GetArg( "-checkblocks", 288))) {
                     strLoadError = _("Corrupted block database detected");
                     break;
                 }
@@ -814,7 +820,7 @@ bool AppInit2(boost::thread_group& threadGroup)
             {
                 CBlockIndex* pindex = (*mi).second;
                 CBlock block;
-                block.ReadFromDisk(pindex);
+                ReadBlockFromDisk(block, pindex);
                 block.BuildMerkleTree();
                 block.print();
                 printf("\n");
@@ -937,7 +943,6 @@ bool AppInit2(boost::thread_group& threadGroup)
     nStart = GetTimeMillis();
 
     {
-        CAddrDB::SetMessageStart(pchMessageStart);
         CAddrDB adb;
         if (!adb.Read(addrman))
             printf("Invalid or missing peers.dat; recreating\n");
@@ -971,7 +976,7 @@ bool AppInit2(boost::thread_group& threadGroup)
         StartRPCThreads();
 
     // Generate coins in the background
-    GenerateDios(GetBoolArg("-gen", false), pwalletMain);
+    GenerateDiosyss(GetBoolArg("-gen", false), pwalletMain);
 
     // ********************************************************* Step 12: finished
 

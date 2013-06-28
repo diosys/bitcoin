@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # Jonas Schnelli, 2013
-# make sure the Bitcoin-Qt.app contains the right plist (including the right version)
+# make sure the Diosys-Qt.app contains the right plist (including the right version)
 # fix made because of serval bugs in Qt mac deployment (https://bugreports.qt-project.org/browse/QTBUG-21267)
 
 from string import Template
 from datetime import date
 
-bitcoinDir = "./";
+diosysDir = "./";
 
-inFile     = bitcoinDir+"/share/qt/Info.plist"
-outFile    = "Bitcoin-Qt.app/Contents/Info.plist"
+inFile     = diosysDir+"/share/qt/Info.plist"
+outFile    = "Diosys-Qt.app/Contents/Info.plist"
 version    = "unknown";
 
-fileForGrabbingVersion = bitcoinDir+"bitcoin-qt.pro"
+fileForGrabbingVersion = diosysDir+"diosys-qt.pro"
 for line in open(fileForGrabbingVersion):
 	lineArr = line.replace(" ", "").split("=");
 	if lineArr[0].startswith("VERSION"):

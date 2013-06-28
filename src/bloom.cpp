@@ -1,11 +1,11 @@
-// Copyright (c) 2012 The Bitcoin developers
+// Copyright (c) 2012 The Diosys developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 #include <math.h>
 #include <stdlib.h>
 
 #include "bloom.h"
-#include "main.h"
+#include "core.h"
 #include "script.h"
 
 #define LN2SQUARED 0.4804530139182014246671025263266649717305529515945455

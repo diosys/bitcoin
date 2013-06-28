@@ -8,6 +8,7 @@
 #include <boost/test/unit_test.hpp>
 #include <boost/foreach.hpp>
 
+#include "chainparams.h"
 #include "main.h"
 #include "wallet.h"
 #include "net.h"
@@ -25,7 +26,7 @@ CService ip(uint32_t i)
 {
     struct in_addr s;
     s.s_addr = i;
-    return CService(CNetAddr(s), GetDefaultPort());
+    return CService(CNetAddr(s), Params().GetDefaultPort());
 }
 
 BOOST_AUTO_TEST_SUITE(DoS_tests)
@@ -99,7 +100,7 @@ BOOST_AUTO_TEST_CASE(DoS_checknbits)
 {
     using namespace boost::assign; // for 'map_list_of()'
 
-    // Timestamps,nBits from the bitcoin block chain.
+    // Timestamps,nBits from the diosys block chain.
     // These are the block-chain checkpoint blocks
     typedef std::map<int64, unsigned int> BlockData;
     BlockData chainData =

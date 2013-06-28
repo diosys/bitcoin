@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin Developers
+// Copyright (c) 2009-2012 The Diosys Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -12,12 +12,13 @@
 // - E-mail usually won't line-break if there's no punctuation to break at.
 // - Double-clicking selects the whole number as one word if it's all alphanumeric.
 //
-#ifndef BITCOIN_BASE58_H
-#define BITCOIN_BASE58_H
+#ifndef DIOSYS_BASE58_H
+#define DIOSYS_BASE58_H
 
 #include <string>
 #include <vector>
 
+#include "chainparams.h"
 #include "bignum.h"
 #include "key.h"
 #include "script.h"
@@ -249,95 +250,65 @@ public:
     bool operator> (const CBase58Data& b58) const { return CompareTo(b58) >  0; }
 };
 
-/** base58-encoded Bitcoin addresses.
+/** base58-encoded Diosys addresses.
  * Public-key-hash-addresses have version 0 (or 111 testnet).
  * The data vector contains RIPEMD160(SHA256(pubkey)), where pubkey is the serialized public key.
  * Script-hash-addresses have version 5 (or 196 testnet).
  * The data vector contains RIPEMD160(SHA256(cscript)), where cscript is the serialized redemption script.
  */
-class CBitcoinAddress;
-class CBitcoinAddressVisitor : public boost::static_visitor<bool>
+class CDiosysAddress;
+class CDiosysAddressVisitor : public boost::static_visitor<bool>
 {
 private:
-    CBitcoinAddress *addr;
+    CDiosysAddress *addr;
 public:
-    CBitcoinAddressVisitor(CBitcoinAddress *addrIn) : addr(addrIn) { }
+    CDiosysAddressVisitor(CDiosysAddress *addrIn) : addr(addrIn) { }
     bool operator()(const CKeyID &id) const;
     bool operator()(const CScriptID &id) const;
     bool operator()(const CNoDestination &no) const;
 };
 
-class CBitcoinAddress : public CBase58Data
+class CDiosysAddress : public CBase58Data
 {
 public:
-    enum
-    {
-        PUBKEY_ADDRESS = 0,
-        SCRIPT_ADDRESS = 5,
-        PUBKEY_ADDRESS_TEST = 111,
-        SCRIPT_ADDRESS_TEST = 196,
-    };
-
     bool Set(const CKeyID &id) {
-        SetData(fTestNet ? PUBKEY_ADDRESS_TEST : PUBKEY_ADDRESS, &id, 20);
+        SetData(Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS), &id, 20);
         return true;
     }
 
     bool Set(const CScriptID &id) {
-        SetData(fTestNet ? SCRIPT_ADDRESS_TEST : SCRIPT_ADDRESS, &id, 20);
+        SetData(Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS), &id, 20);
         return true;
     }
 
     bool Set(const CTxDestination &dest)
     {
-        return boost::apply_visitor(CBitcoinAddressVisitor(this), dest);
+        return boost::apply_visitor(CDiosysAddressVisitor(this), dest);
     }
 
     bool IsValid() const
     {
-        unsigned int nExpectedSize = 20;
-        bool fExpectTestNet = false;
-        switch(nVersion)
-        {
-            case PUBKEY_ADDRESS:
-                nExpectedSize = 20; // Hash of public key
-                fExpectTestNet = false;
-                break;
-            case SCRIPT_ADDRESS:
-                nExpectedSize = 20; // Hash of CScript
-                fExpectTestNet = false;
-                break;
-
-            case PUBKEY_ADDRESS_TEST:
-                nExpectedSize = 20;
-                fExpectTestNet = true;
-                break;
-            case SCRIPT_ADDRESS_TEST:
-                nExpectedSize = 20;
-                fExpectTestNet = true;
-                break;
-
-            default:
-                return false;
-        }
-        return fExpectTestNet == fTestNet && vchData.size() == nExpectedSize;
+        bool fCorrectSize = vchData.size() == 20;
+        bool fKnownVersion = nVersion == Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS) ||
+                             nVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS);
+        return fCorrectSize && fKnownVersion;
     }
 
-    CBitcoinAddress()
+    CDiosysAddress()
     {
     }
 
-    CBitcoinAddress(const CTxDestination &dest)
+    CDiosysAddress(const CTxDestination &dest)
     {
         Set(dest);
     }
 
-    CBitcoinAddress(const std::string& strAddress)
+    CDiosysAddress(const std::string& strAddress)
     {
         SetString(strAddress);
     }
 
-    CBitcoinAddress(const char* pszAddress)
+    CDiosysAddress(const char* pszAddress)
     {
         SetString(pszAddress);
     }
@@ -345,63 +316,42 @@ public:
     CTxDestination Get() const {
         if (!IsValid())
             return CNoDestination();
-        switch (nVersion) {
-        case PUBKEY_ADDRESS:
-        case PUBKEY_ADDRESS_TEST: {
-            uint160 id;
-            memcpy(&id, &vchData[0], 20);
+        uint160 id;
+        memcpy(&id, &vchData[0], 20);
+        if (nVersion == Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS))
             return CKeyID(id);
-        }
-        case SCRIPT_ADDRESS:
-        case SCRIPT_ADDRESS_TEST: {
-            uint160 id;
-            memcpy(&id, &vchData[0], 20);
+        else if (nVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS))
             return CScriptID(id);
-        }
-        }
-        return CNoDestination();
+        else
+            return CNoDestination();
     }
 
     bool GetKeyID(CKeyID &keyID) const {
-        if (!IsValid())
+        if (!IsValid() || nVersion != Params().Base58Prefix(CChainParams::PUBKEY_ADDRESS))
             return false;
-        switch (nVersion) {
-        case PUBKEY_ADDRESS:
-        case PUBKEY_ADDRESS_TEST: {
-            uint160 id;
-            memcpy(&id, &vchData[0], 20);
-            keyID = CKeyID(id);
-            return true;
-        }
-        default: return false;
-        }
+        uint160 id;
+        memcpy(&id, &vchData[0], 20);
+        keyID = CKeyID(id);
+        return true;
     }
 
     bool IsScript() const {
-        if (!IsValid())
-            return false;
-        switch (nVersion) {
-        case SCRIPT_ADDRESS:
-        case SCRIPT_ADDRESS_TEST: {
-            return true;
-        }
-        default: return false;
-        }
+        return IsValid() && nVersion == Params().Base58Prefix(CChainParams::SCRIPT_ADDRESS);
     }
 };
 
-bool inline CBitcoinAddressVisitor::operator()(const CKeyID &id) const         { return addr->Set(id); }
-bool inline CBitcoinAddressVisitor::operator()(const CScriptID &id) const      { return addr->Set(id); }
-bool inline CBitcoinAddressVisitor::operator()(const CNoDestination &id) const { return false; }
+bool inline CDiosysAddressVisitor::operator()(const CKeyID &id) const         { return addr->Set(id); }
+bool inline CDiosysAddressVisitor::operator()(const CScriptID &id) const      { return addr->Set(id); }
+bool inline CDiosysAddressVisitor::operator()(const CNoDestination &id) const { return false; }
 
 /** A base58-encoded secret key */
-class CBitcoinSecret : public CBase58Data
+class CDiosysSecret : public CBase58Data
 {
 public:
     void SetKey(const CKey& vchSecret)
     {
         assert(vchSecret.IsValid());
-        SetData(fTestNet ? 239 : 128, vchSecret.begin(), vchSecret.size());
+        SetData(Params().Base58Prefix(CChainParams::SECRET_KEY), vchSecret.begin(), vchSecret.size());
         if (vchSecret.IsCompressed())
             vchData.push_back(1);
     }
@@ -415,20 +365,9 @@ public:
 
     bool IsValid() const
     {
-        bool fExpectTestNet = false;
-        switch(nVersion)
-        {
-            case 128:
-                break;
-
-            case 239:
-                fExpectTestNet = true;
-                break;
-
-            default:
-                return false;
-        }
-        return fExpectTestNet == fTestNet && (vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1));
+        bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
+        bool fCorrectVersion = nVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
+        return fExpectedFormat && fCorrectVersion;
     }
 
     bool SetString(const char* pszSecret)
@@ -441,14 +380,14 @@ public:
         return SetString(strSecret.c_str());
     }
 
-    CBitcoinSecret(const CKey& vchSecret)
+    CDiosysSecret(const CKey& vchSecret)
     {
         SetKey(vchSecret);
     }
 
-    CBitcoinSecret()
+    CDiosysSecret()
     {
     }
 };
 
-#endif // BITCOIN_BASE58_H
+#endif // DIOSYS_BASE58_H

@@ -1,15 +1,15 @@
 /*
- * Qt4 bitcoin GUI.
+ * Qt4 diosysGUI.
  *
  * W.J. van der Laan 2011-2012
- * The Bitcoin Developers 2011-2013
+ * The DiosysDevelopers 2011-2013
  */
 #ifndef WALLETFRAME_H
 #define WALLETFRAME_H
 
 #include <QFrame>
 
-class BitcoinGUI;
+class DiosysUI;
 class ClientModel;
 class WalletModel;
 class WalletStack;
@@ -19,7 +19,7 @@ class WalletFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletFrame(BitcoinGUI *_gui = 0);
+    explicit WalletFrame(DiosysUI *_gui = 0);
     ~WalletFrame();
 
     void setClientModel(ClientModel *clientModel);
@@ -34,7 +34,7 @@ public:
     void showOutOfSyncWarning(bool fShow);
 
 private:
-    BitcoinGUI *gui;
+    DiosysUI *gui;
     ClientModel *clientModel;
     WalletStack *walletStack;
 

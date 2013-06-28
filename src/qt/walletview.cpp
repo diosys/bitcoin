@@ -1,11 +1,11 @@
 /*
- * Qt4 bitcoin GUI.
+ * Qt4 diosysGUI.
  *
  * W.J. van der Laan 2011-2012
- * The Bitcoin Developers 2011-2013
+ * The DiosysDevelopers 2011-2013
  */
 #include "walletview.h"
-#include "bitcoingui.h"
+#include "diosysui.h"
 #include "transactiontablemodel.h"
 #include "addressbookpage.h"
 #include "sendcoinsdialog.h"
@@ -29,7 +29,7 @@
 #include <QFileDialog>
 #include <QPushButton>
 
-WalletView::WalletView(QWidget *parent, BitcoinGUI *_gui):
+WalletView::WalletView(QWidget *parent, DiosysUI *_gui):
     QStackedWidget(parent),
     gui(_gui),
     clientModel(0),
@@ -90,7 +90,7 @@ WalletView::~WalletView()
 {
 }
 
-void WalletView::setBitcoinGUI(BitcoinGUI *gui)
+void WalletView::setDiosysUI(dDiosysI *gui)
 {
     this->gui = gui;
 }
