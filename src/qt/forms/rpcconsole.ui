@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Diosys- Debug window</string>
+   <string>Diosys - Debug window</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
@@ -36,7 +36,7 @@
           </font>
          </property>
          <property name="text">
-          <string>DiosysCore</string>
+          <string>Diosys Core</string>
          </property>
         </widget>
        </item>
@@ -322,7 +322,7 @@
        <item row="15" column="0">
         <widget class="QPushButton" name="openDebugLogfileButton">
          <property name="toolTip">
-          <string>Open the Diosysdebug log file from the current data directory. This can take a few seconds for large log files.</string>
+          <string>Open the Diosys debug log file from the current data directory. This can take a few seconds for large log files.</string>
          </property>
          <property name="text">
           <string>&amp;Open</string>
@@ -348,7 +348,7 @@
        <item row="17" column="0">
         <widget class="QPushButton" name="showCLOptionsButton">
          <property name="toolTip">
-          <string>Show the DiosysQt help message to get a list with possible dDiosysommand-line options.</string>
+          <string>Show the Diosys-Qt help message to get a list with possible Diosys command-line options.</string>
          </property>
          <property name="text">
           <string>&amp;Show</string>
@@ -430,7 +430,7 @@
             <string/>
            </property>
            <property name="icon">
-            <iconset resource="../diosysqrc">
+            <iconset resource="../diosys.qrc">
              <normaloff>:/icons/remove</normaloff>:/icons/remove</iconset>
            </property>
            <property name="shortcut">
@@ -450,7 +450,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../diosysqrc"/>
+  <include location="../diosys.qrc"/>
  </resources>
  <connections/>
 </ui>

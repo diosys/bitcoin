@@ -4,13 +4,13 @@
     <name>AboutDialog</name>
     <message>
         <location filename="../forms/aboutdialog.ui" line="+14"/>
-        <source>About Diosys/source>
-        <translation>Over Diosys/translation>
+        <source>About Diosys</source>
+        <translation>Over Diosys</translation>
     </message>
     <message>
         <location line="+39"/>
-        <source>&lt;b&gt;Diosyslt;/b&gt; version</source>
-        <translation>&lt;b&gt;Diosyslt;/b&gt; versie</translation>
+        <source>&lt;b&gt;Diosys&lt;/b&gt; version</source>
+        <translation>&lt;b&gt;Diosys&lt;/b&gt; versie</translation>
     </message>
     <message>
         <location line="+57"/>
@@ -34,8 +34,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="+0"/>
-        <source>The Diosysdevelopers</source>
-        <translation>De Diosysontwikkelaars</translation>
+        <source>The Diosys developers</source>
+        <translation>De Diosys-ontwikkelaars</translation>
     </message>
 </context>
 <context>
@@ -67,8 +67,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="+63"/>
-        <source>These are your Diosysaddresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
-        <translation>Dit zijn uw Diosysdressen om betalingen mee te ontvangen. U kunt er voor kiezen om een uniek adres aan te maken voor elke afzender. Op deze manier kunt u bijhouden wie al aan u betaald heeft.</translation>
+        <source>These are your Diosys addresses for receiving payments. You may want to give a different one to each sender so you can keep track of who is paying you.</source>
+        <translation>Dit zijn uw Diosysadressen om betalingen mee te ontvangen. U kunt er voor kiezen om een uniek adres aan te maken voor elke afzender. Op deze manier kunt u bijhouden wie al aan u betaald heeft.</translation>
     </message>
     <message>
         <location filename="../forms/addressbookpage.ui" line="+14"/>
@@ -82,8 +82,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="+11"/>
-        <source>Sign a message to prove you own a Diosysaddress</source>
-        <translation>Onderteken een bericht om te bewijzen dat u een bepaald Diosysdres bezit</translation>
+        <source>Sign a message to prove you own a Diosys address</source>
+        <translation>Onderteken een bericht om te bewijzen dat u een bepaald Diosysadres bezit</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -107,8 +107,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="-44"/>
-        <source>Verify a message to ensure it was signed with a specified Diosysaddress</source>
-        <translation>Controleer een bericht om te verifiëren dat het gespecificeerde Diosysdres het bericht heeft ondertekend.</translation>
+        <source>Verify a message to ensure it was signed with a specified Diosys address</source>
+        <translation>Controleer een bericht om te verifiëren dat het gespecificeerde Diosysadres het bericht heeft ondertekend.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -122,8 +122,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location filename="../addressbookpage.cpp" line="-5"/>
-        <source>These are your Diosysaddresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dit zijn uw Diosysdressen om betalingen mee te verzenden. Check altijd het bedrag en het ontvangende adres voordat u uw ddiosysverzendt.</translation>
+        <source>These are your Diosys addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Dit zijn uw Diosysadressen om betalingen mee te verzenden. Check altijd het bedrag en het ontvangende adres voordat u uw diosyss verzendt.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -248,8 +248,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="+1"/>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DIOSYS&lt;/b&gt;!</source>
-        <translation>Waarschuwing: Als u uw portemonnee versleutelt en uw wachtwoord vergeet, zult u &lt;b&gt;AL UW DIOSYS VERLIEZEN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR DIOSYSS&lt;/b&gt;!</source>
+        <translation>Waarschuwing: Als u uw portemonnee versleutelt en uw wachtwoord vergeet, zult u &lt;b&gt;AL UW DIOSYSS VERLIEZEN&lt;/b&gt;!</translation>
     </message>
     <message>
         <location line="+0"/>
@@ -275,8 +275,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="-56"/>
-        <source>Diosyswill close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your ddiosysfrom being stolen by malware infecting your computer.</source>
-        <translation>Diosyszal nu afsluiten om het versleutelingsproces te voltooien. Onthoud dat het versleutelen van uw portemonnee u niet volledig kan beschermen: Malware kan uw computer infecteren en uw ddiosysstelen.</translation>
+        <source>Diosys will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your diosyss from being stolen by malware infecting your computer.</source>
+        <translation>Diosys zal nu afsluiten om het versleutelingsproces te voltooien. Onthoud dat het versleutelen van uw portemonnee u niet volledig kan beschermen: Malware kan uw computer infecteren en uw diosyss stelen.</translation>
     </message>
     <message>
         <location line="+13"/>
@@ -321,9 +321,9 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
 </context>
 <context>
-    <name>DiosysUI</name>
+    <name>DiosysGUI</name>
     <message>
-        <location filename="../diosysui.cpp" line="+233"/>
+        <location filename="../diosysgui.cpp" line="+233"/>
         <source>Sign &amp;message...</source>
         <translation>&amp;Onderteken bericht...</translation>
     </message>
@@ -374,8 +374,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="+4"/>
-        <source>Show information about Diosys/source>
-        <translation>Laat informatie zien over Diosys/translation>
+        <source>Show information about Diosys</source>
+        <translation>Laat informatie zien over Diosys</translation>
     </message>
     <message>
         <location line="+2"/>
@@ -419,13 +419,13 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="-347"/>
-        <source>Send coins to a Diosysaddress</source>
-        <translation>Verstuur munten naar een Diosysdres</translation>
+        <source>Send coins to a Diosys address</source>
+        <translation>Verstuur munten naar een Diosysadres</translation>
     </message>
     <message>
         <location line="+49"/>
-        <source>Modify configuration options for Diosys/source>
-        <translation>Wijzig instellingen van Diosys/translation>
+        <source>Modify configuration options for Diosys</source>
+        <translation>Wijzig instellingen van Diosys</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -455,8 +455,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     <message>
         <location line="-165"/>
         <location line="+530"/>
-        <source>Diosys/source>
-        <translation>Diosys/translation>
+        <source>Diosys</source>
+        <translation>Diosys</translation>
     </message>
     <message>
         <location line="-530"/>
@@ -480,8 +480,8 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="+22"/>
-        <source>&amp;About Diosys/source>
-        <translation>&amp;Over Diosys/translation>
+        <source>&amp;About Diosys</source>
+        <translation>&amp;Over Diosys</translation>
     </message>
     <message>
         <location line="+9"/>
@@ -500,13 +500,13 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="+7"/>
-        <source>Sign messages with your Diosysaddresses to prove you own them</source>
-        <translation>Onderteken berichten met uw Diosysdressen om te bewijzen dat u deze adressen bezit</translation>
+        <source>Sign messages with your Diosys addresses to prove you own them</source>
+        <translation>Onderteken berichten met uw Diosysadressen om te bewijzen dat u deze adressen bezit</translation>
     </message>
     <message>
         <location line="+2"/>
-        <source>Verify messages to ensure they were signed with specified Diosysaddresses</source>
-        <translation>Verifiëer handtekeningen om zeker te zijn dat de berichten zijn ondertekend met de gespecificeerde Diosysdressen</translation>
+        <source>Verify messages to ensure they were signed with specified Diosys addresses</source>
+        <translation>Verifiëer handtekeningen om zeker te zijn dat de berichten zijn ondertekend met de gespecificeerde Diosysadressen</translation>
     </message>
     <message>
         <location line="+28"/>
@@ -536,13 +536,13 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     </message>
     <message>
         <location line="+47"/>
-        <source>Diosysclient</source>
-        <translation>Diosysclient</translation>
+        <source>Diosys client</source>
+        <translation>Diosys client</translation>
     </message>
     <message numerus="yes">
         <location line="+141"/>
-        <source>%n active connection(s) to Diosysnetwork</source>
-        <translation><numerusform>%n actieve connectie naar Diosysetwerk</numerusform><numerusform>%n actieve connecties naar dDiosystwerk</numerusform></translation>
+        <source>%n active connection(s) to Diosys network</source>
+        <translation><numerusform>%n actieve connectie naar Diosysnetwerk</numerusform><numerusform>%n actieve connecties naar Diosysnetwerk</numerusform></translation>
     </message>
     <message>
         <location line="+22"/>
@@ -607,7 +607,7 @@ Dit product bevat software ontwikkeld door het OpenSSL Project voor gebruik in d
     <message>
         <location line="+70"/>
         <source>This transaction is over the size limit. You can still send it for a fee of %1, which goes to the nodes that process your transaction and helps to support the network. Do you want to pay the fee?</source>
-        <translation>Deze transactie overschrijdt de groottelimiet. Om de transactie alsnog te versturen kunt u transactiekosten betalen van %1. Deze transactiekosten gaan naar de nodes die uw transactie verwerken en het helpt op deze manier bij het ondersteunen van het Diosysetwerk. Wilt u de transactiekosten betalen?</translation>
+        <translation>Deze transactie overschrijdt de groottelimiet. Om de transactie alsnog te versturen kunt u transactiekosten betalen van %1. Deze transactiekosten gaan naar de nodes die uw transactie verwerken en het helpt op deze manier bij het ondersteunen van het Diosysnetwerk. Wilt u de transactiekosten betalen?</translation>
     </message>
     <message>
         <location line="-140"/>
@@ -656,8 +656,8 @@ Adres: %4
     <message>
         <location line="-23"/>
         <location line="+23"/>
-        <source>URI can not be parsed! This can be caused by an invalid Diosysaddress or malformed URI parameters.</source>
-        <translation>URI kan niet worden geïnterpreteerd. Dit kan komen door een ongeldig Diosysdres of misvormde URI-parameters.</translation>
+        <source>URI can not be parsed! This can be caused by an invalid Diosys address or malformed URI parameters.</source>
+        <translation>URI kan niet worden geïnterpreteerd. Dit kan komen door een ongeldig Diosysadres of misvormde URI-parameters.</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -670,9 +670,9 @@ Adres: %4
         <translation>Portemonnee is &lt;b&gt;versleuteld&lt;/b&gt; en momenteel &lt;b&gt;gesloten&lt;/b&gt;</translation>
     </message>
     <message>
-        <location filename="../diosyscpp" line="+111"/>
-        <source>A fatal error occurred. Diosyscan no longer continue safely and will quit.</source>
-        <translation>Er is een fatale fout opgetreden. Diosyskan niet meer veilig doorgaan en zal nu afgesloten worden.</translation>
+        <location filename="../diosys.cpp" line="+111"/>
+        <source>A fatal error occurred. Diosys can no longer continue safely and will quit.</source>
+        <translation>Er is een fatale fout opgetreden. Diosys kan niet meer veilig doorgaan en zal nu afgesloten worden.</translation>
     </message>
 </context>
 <context>
@@ -737,8 +737,8 @@ Adres: %4
     </message>
     <message>
         <location line="-5"/>
-        <source>The entered address &quot;%1&quot; is not a valid Diosysaddress.</source>
-        <translation>Het opgegeven adres &quot;%1&quot; is een ongeldig Diosysdres</translation>
+        <source>The entered address &quot;%1&quot; is not a valid Diosys address.</source>
+        <translation>Het opgegeven adres &quot;%1&quot; is een ongeldig Diosysadres</translation>
     </message>
     <message>
         <location line="+10"/>
@@ -756,8 +756,8 @@ Adres: %4
     <message>
         <location filename="../guiutil.cpp" line="+424"/>
         <location line="+12"/>
-        <source>DiosysQt</source>
-        <translation>DiosysQt</translation>
+        <source>Diosys-Qt</source>
+        <translation>Diosys-Qt</translation>
     </message>
     <message>
         <location line="-12"/>
@@ -819,13 +819,13 @@ Adres: %4
     </message>
     <message>
         <location line="+31"/>
-        <source>Automatically start Diosysafter logging in to the system.</source>
-        <translation>Start Diosysautomatisch na inloggen in het systeem</translation>
+        <source>Automatically start Diosys after logging in to the system.</source>
+        <translation>Start Diosys automatisch na inloggen in het systeem</translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>&amp;Start Diosyson system login</source>
-        <translation>Start &amp;Diosysbij het inloggen in het systeem</translation>
+        <source>&amp;Start Diosys on system login</source>
+        <translation>Start &amp;Diosys bij het inloggen in het systeem</translation>
     </message>
     <message>
         <location line="+35"/>
@@ -844,8 +844,8 @@ Adres: %4
     </message>
     <message>
         <location line="+6"/>
-        <source>Automatically open the Diosysclient port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Open de Diosyspoort automatisch op de router. Dit werkt alleen als de router UPnP ondersteunt en het aanstaat.</translation>
+        <source>Automatically open the Diosys client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Open de Diosys-poort automatisch op de router. Dit werkt alleen als de router UPnP ondersteunt en het aanstaat.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -854,8 +854,8 @@ Adres: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Connect to the Diosysnetwork through a SOCKS proxy (e.g. when connecting through Tor).</source>
-        <translation>Verbind met het Diosysnetwerk via een SOCKS-proxy (bijv. wanneer u via Tor wilt verbinden)</translation>
+        <source>Connect to the Diosys network through a SOCKS proxy (e.g. when connecting through Tor).</source>
+        <translation>Verbind met het Diosys-netwerk via een SOCKS-proxy (bijv. wanneer u via Tor wilt verbinden)</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -929,8 +929,8 @@ Adres: %4
     </message>
     <message>
         <location line="+13"/>
-        <source>The user interface language can be set here. This setting will take effect after restarting Diosys</source>
-        <translation>De taal van de gebruikersinterface kan hier ingesteld worden. Deze instelling zal pas van kracht worden nadat Diosysherstart wordt.</translation>
+        <source>The user interface language can be set here. This setting will take effect after restarting Diosys.</source>
+        <translation>De taal van de gebruikersinterface kan hier ingesteld worden. Deze instelling zal pas van kracht worden nadat Diosys herstart wordt.</translation>
     </message>
     <message>
         <location line="+11"/>
@@ -944,8 +944,8 @@ Adres: %4
     </message>
     <message>
         <location line="+9"/>
-        <source>Whether to show Diosysaddresses in the transaction list or not.</source>
-        <translation>Of Diosysdressen getoond worden in de transactielijst</translation>
+        <source>Whether to show Diosys addresses in the transaction list or not.</source>
+        <translation>Of Diosysadressen getoond worden in de transactielijst</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -996,8 +996,8 @@ Adres: %4
     <message>
         <location line="-9"/>
         <location line="+9"/>
-        <source>This setting will take effect after restarting Diosys</source>
-        <translation>Deze instelling zal pas van kracht worden na het herstarten van Diosys</translation>
+        <source>This setting will take effect after restarting Diosys.</source>
+        <translation>Deze instelling zal pas van kracht worden na het herstarten van Diosys.</translation>
     </message>
     <message>
         <location line="+29"/>
@@ -1015,8 +1015,8 @@ Adres: %4
     <message>
         <location line="+50"/>
         <location line="+166"/>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Diosysnetwork after a connection is established, but this process has not completed yet.</source>
-        <translation>De weergegeven informatie kan verouderd zijn. Uw portemonnee synchroniseert automaticsh met het Diosysetwerk nadat een verbinding is gelegd, maar dit proces is nog niet voltooid.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Diosys network after a connection is established, but this process has not completed yet.</source>
+        <translation>De weergegeven informatie kan verouderd zijn. Uw portemonnee synchroniseert automaticsh met het Diosysnetwerk nadat een verbinding is gelegd, maar dit proces is nog niet voltooid.</translation>
     </message>
     <message>
         <location line="-124"/>
@@ -1069,8 +1069,8 @@ Adres: %4
     <name>PaymentServer</name>
     <message>
         <location filename="../paymentserver.cpp" line="+107"/>
-        <source>Cannot start diosys click-to-pay handler</source>
-        <translation>Kan diosysniet starten: click-to-pay handler</translation>
+        <source>Cannot start diosys: click-to-pay handler</source>
+        <translation>Kan diosys niet starten: click-to-pay handler</translation>
     </message>
 </context>
 <context>
@@ -1219,8 +1219,8 @@ Adres: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Show the DiosysQt help message to get a list with possible dDiosysommand-line options.</source>
-        <translation>Toon het Diosyst-hulpbericht voor een lijst met mogelijke dDiosysommandoregel-opties.</translation>
+        <source>Show the Diosys-Qt help message to get a list with possible Diosys command-line options.</source>
+        <translation>Toon het DiosysQt-hulpbericht voor een lijst met mogelijke Diosys commandoregel-opties.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1239,13 +1239,13 @@ Adres: %4
     </message>
     <message>
         <location line="-104"/>
-        <source>Diosys- Debug window</source>
-        <translation>Diosysdebugscherm</translation>
+        <source>Diosys - Debug window</source>
+        <translation>Diosys-debugscherm</translation>
     </message>
     <message>
         <location line="+25"/>
-        <source>DiosysCore</source>
-        <translation>DiosysKern</translation>
+        <source>Diosys Core</source>
+        <translation>Diosys Kern</translation>
     </message>
     <message>
         <location line="+279"/>
@@ -1254,8 +1254,8 @@ Adres: %4
     </message>
     <message>
         <location line="+7"/>
-        <source>Open the Diosysdebug log file from the current data directory. This can take a few seconds for large log files.</source>
-        <translation>Open het Diosysebug-logbestand van de huidige datamap. Dit kan een aantal seconden duren voor grote logbestanden.</translation>
+        <source>Open the Diosys debug log file from the current data directory. This can take a few seconds for large log files.</source>
+        <translation>Open het Diosysdebug-logbestand van de huidige datamap. Dit kan een aantal seconden duren voor grote logbestanden.</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -1264,8 +1264,8 @@ Adres: %4
     </message>
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
-        <source>Welcome to the DiosysRPC console.</source>
-        <translation>Welkom bij de DiosysRPC-console.</translation>
+        <source>Welcome to the Diosys RPC console.</source>
+        <translation>Welkom bij de Diosys RPC-console.</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -1448,8 +1448,8 @@ Adres: %4
     </message>
     <message>
         <location filename="../sendcoinsentry.cpp" line="+1"/>
-        <source>Enter a Diosysaddress (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Vul een Diosysdres in (bijv. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Diosys address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Vul een Diosysadres in (bijv. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
 </context>
 <context>
@@ -1513,8 +1513,8 @@ Adres: %4
     </message>
     <message>
         <location line="+21"/>
-        <source>Sign the message to prove you own this Diosysaddress</source>
-        <translation>Onderteken een bericht om te bewijzen dat u een bepaald Diosysdres bezit</translation>
+        <source>Sign the message to prove you own this Diosys address</source>
+        <translation>Onderteken een bericht om te bewijzen dat u een bepaald Diosysadres bezit</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1549,8 +1549,8 @@ Adres: %4
     </message>
     <message>
         <location line="+40"/>
-        <source>Verify the message to ensure it was signed with the specified Diosysaddress</source>
-        <translation>Controleer een bericht om te verifiëren dat het gespecificeerde Diosysdres het bericht heeft ondertekend.</translation>
+        <source>Verify the message to ensure it was signed with the specified Diosys address</source>
+        <translation>Controleer een bericht om te verifiëren dat het gespecificeerde Diosysadres het bericht heeft ondertekend.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -1565,8 +1565,8 @@ Adres: %4
     <message>
         <location filename="../signverifymessagedialog.cpp" line="+27"/>
         <location line="+3"/>
-        <source>Enter a Diosysaddress (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
-        <translation>Vul een Diosysdres in (bijv. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
+        <source>Enter a Diosys address (e.g. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</source>
+        <translation>Vul een Diosysadres in (bijv. 1NS17iag9jJgTHD1VXjvLCEnZuQ3rJDE9L)</translation>
     </message>
     <message>
         <location line="-2"/>
@@ -1575,8 +1575,8 @@ Adres: %4
     </message>
     <message>
         <location line="+3"/>
-        <source>Enter Diosyssignature</source>
-        <translation>Voer Diosyshandtekening in</translation>
+        <source>Enter Diosys signature</source>
+        <translation>Voer Diosys-handtekening in</translation>
     </message>
     <message>
         <location line="+82"/>
@@ -1649,8 +1649,8 @@ Adres: %4
     <name>SplashScreen</name>
     <message>
         <location filename="../splashscreen.cpp" line="+22"/>
-        <source>The Diosysdevelopers</source>
-        <translation>De Diosysontwikkelaars</translation>
+        <source>The Diosys developers</source>
+        <translation>De Diosys-ontwikkelaars</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2184,11 +2184,11 @@ Adres: %4
     </message>
 </context>
 <context>
-    <name>diosyscore</name>
+    <name>diosys-core</name>
     <message>
-        <location filename="../diosystrings.cpp" line="+94"/>
-        <source>Diosysversion</source>
-        <translation>Diosysersie</translation>
+        <location filename="../diosysstrings.cpp" line="+94"/>
+        <source>Diosys version</source>
+        <translation>Diosysversie</translation>
     </message>
     <message>
         <location line="+102"/>
@@ -2197,8 +2197,8 @@ Adres: %4
     </message>
     <message>
         <location line="-29"/>
-        <source>Send command to -server or diosys</source>
-        <translation>Stuur commando naar -server of diosys</translation>
+        <source>Send command to -server or diosysd</source>
+        <translation>Stuur commando naar -server of diosysd</translation>
     </message>
     <message>
         <location line="-23"/>
@@ -2217,14 +2217,14 @@ Adres: %4
     </message>
     <message>
         <location line="+24"/>
-        <source>Specify configuration file (default: diosysconf)</source>
-        <translation>Specificeer configuratiebestand (standaard: diosysconf)
+        <source>Specify configuration file (default: diosys.conf)</source>
+        <translation>Specificeer configuratiebestand (standaard: diosys.conf)
 </translation>
     </message>
     <message>
         <location line="+3"/>
-        <source>Specify pid file (default: diosys.pid)</source>
-        <translation>Specificeer pid-bestand (standaard: diosys.pid)
+        <source>Specify pid file (default: diosysd.pid)</source>
+        <translation>Specificeer pid-bestand (standaard: diosysd.pid)
 </translation>
     </message>
     <message>
@@ -2302,23 +2302,23 @@ Adres: %4
         <source>%s, you must set a rpcpassword in the configuration file:
 %s
 It is recommended you use the following random password:
-rpcuser=diosyspc
+rpcuser=diosysrpc
 rpcpassword=%s
 (you do not need to remember this password)
 The username and password MUST NOT be the same.
 If the file does not exist, create it with owner-readable-only file permissions.
 It is also recommended to set alertnotify so you are notified of problems;
-for example: alertnotify=echo %%s | mail -s &quot;DiosysAlert&quot; admin@foo.com
+for example: alertnotify=echo %%s | mail -s &quot;Diosys Alert&quot; admin@foo.com
 </source>
         <translation>%s, u moet een RPC-wachtwoord instellen in het configuratiebestand: %s
 U wordt aangeraden het volgende willekeurige wachtwoord te gebruiken:
-rpcuser=diosyspc
+rpcuser=diosysrpc
 rpcpassword=%s
 (u hoeft dit wachtwoord niet te onthouden)
 De gebruikersnaam en wachtwoord mogen niet hetzelfde zijn.
 Als het bestand niet bestaat, make hem dan aan met leesrechten voor enkel de eigenaar.
 Het is ook aan te bevelen &quot;alertnotify&quot; in te stellen zodat u op de hoogte gesteld wordt van problemen;
-for example: alertnotify=echo %%s | mail -s &quot;DiosysAlert&quot; admin@foo.com</translation>
+for example: alertnotify=echo %%s | mail -s &quot;Diosys Alert&quot; admin@foo.com</translation>
     </message>
     <message>
         <location line="+17"/>
@@ -2332,8 +2332,8 @@ for example: alertnotify=echo %%s | mail -s &quot;DiosysAlert&quot; admin@foo.co
     </message>
     <message>
         <location line="+3"/>
-        <source>Cannot obtain a lock on data directory %s. Diosysis probably already running.</source>
-        <translation>Kan geen lock op de datamap %s verkrijgen. Diosysdraait vermoedelijk reeds.</translation>
+        <source>Cannot obtain a lock on data directory %s. Diosys is probably already running.</source>
+        <translation>Kan geen lock op de datamap %s verkrijgen. Diosys draait vermoedelijk reeds.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2377,8 +2377,8 @@ for example: alertnotify=echo %%s | mail -s &quot;DiosysAlert&quot; admin@foo.co
     </message>
     <message>
         <location line="+3"/>
-        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Diosyswill not work properly.</source>
-        <translation>Waarschuwing: Controleer dat de datum en tijd op uw computer correct zijn ingesteld. Als uw klok fout staat zal Diosysniet correct werken.</translation>
+        <source>Warning: Please check that your computer&apos;s date and time are correct! If your clock is wrong Diosys will not work properly.</source>
+        <translation>Waarschuwing: Controleer dat de datum en tijd op uw computer correct zijn ingesteld. Als uw klok fout staat zal Diosys niet correct werken.</translation>
     </message>
     <message>
         <location line="+3"/>
@@ -2627,8 +2627,8 @@ for example: alertnotify=echo %%s | mail -s &quot;DiosysAlert&quot; admin@foo.co
     </message>
     <message>
         <location line="+5"/>
-        <source>SSL options: (see the DiosysWiki for SSL setup instructions)</source>
-        <translation>SSL-opties: (zie de Diosyswiki voor SSL-instructies)</translation>
+        <source>SSL options: (see the Diosys Wiki for SSL setup instructions)</source>
+        <translation>SSL-opties: (zie de Diosys wiki voor SSL-instructies)</translation>
     </message>
     <message>
         <location line="+1"/>
@@ -2817,13 +2817,13 @@ for example: alertnotify=echo %%s | mail -s &quot;DiosysAlert&quot; admin@foo.co
     </message>
     <message>
         <location line="+1"/>
-        <source>Error loading wallet.dat: Wallet requires newer version of Diosys/source>
-        <translation>Fout bij laden wallet.dat: Portemonnee vereist een nieuwere versie van Diosys/translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Diosys</source>
+        <translation>Fout bij laden wallet.dat: Portemonnee vereist een nieuwere versie van Diosys</translation>
     </message>
     <message>
         <location line="+93"/>
-        <source>Wallet needed to be rewritten: restart Diosysto complete</source>
-        <translation>Portemonnee moest herschreven worden: Herstart Diosysom te voltooien</translation>
+        <source>Wallet needed to be rewritten: restart Diosys to complete</source>
+        <translation>Portemonnee moest herschreven worden: Herstart Diosys om te voltooien</translation>
     </message>
     <message>
         <location line="-95"/>
@@ -2882,8 +2882,8 @@ for example: alertnotify=echo %%s | mail -s &quot;DiosysAlert&quot; admin@foo.co
     </message>
     <message>
         <location line="-25"/>
-        <source>Unable to bind to %s on this computer. Diosysis probably already running.</source>
-        <translation>Niet in staat om aan %s te binden op deze computer. Diosysdraait vermoedelijk reeds.</translation>
+        <source>Unable to bind to %s on this computer. Diosys is probably already running.</source>
+        <translation>Niet in staat om aan %s te binden op deze computer. Diosys draait vermoedelijk reeds.</translation>
     </message>
     <message>
         <location line="+64"/>

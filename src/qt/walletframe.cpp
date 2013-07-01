@@ -1,17 +1,17 @@
 /*
- * Qt4 diosysGUI.
+ * Qt4 diosys GUI.
  *
  * W.J. van der Laan 2011-2012
- * The DiosysDevelopers 2011-2013
+ * The Diosys Developers 2011-2013
  */
 #include "walletframe.h"
-#include "diosysui.h"
+#include "diosysgui.h"
 #include "walletstack.h"
 
 #include <QHBoxLayout>
 #include <QMessageBox>
 
-WalletFrame::WalletFrame(DiosysUI *_gui) :
+WalletFrame::WalletFrame(DiosysGUI *_gui) :
     QFrame(_gui),
     gui(_gui),
     clientModel(0)
@@ -20,7 +20,7 @@ WalletFrame::WalletFrame(DiosysUI *_gui) :
     QHBoxLayout *walletFrameLayout = new QHBoxLayout(this);
     setContentsMargins(0,0,0,0);
     walletStack = new WalletStack(this);
-    walletStack->setDiosysUI(gui);
+    walletStack->setDiosysGUI(gui);
     walletFrameLayout->setContentsMargins(0,0,0,0);
     walletFrameLayout->addWidget(walletStack);
 }

@@ -59,7 +59,7 @@
           </widget>
          </item>
          <item>
-          <widget class="DiosysmountField" name="transactionFee"/>
+          <widget class="DiosysAmountField" name="transactionFee"/>
          </item>
          <item>
           <spacer name="horizontalSpacer_1_Main">
@@ -77,12 +77,12 @@
         </layout>
        </item>
        <item>
-        <widget class="QCheckBox" name="diosystStartup">
+        <widget class="QCheckBox" name="diosysAtStartup">
          <property name="toolTip">
-          <string>Automatically start Diosysafter logging in to the system.</string>
+          <string>Automatically start Diosys after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start Diosyson system login</string>
+          <string>&amp;Start Diosys on system login</string>
          </property>
         </widget>
        </item>
@@ -139,7 +139,7 @@
        <item>
         <widget class="QCheckBox" name="mapPortUpnp">
          <property name="toolTip">
-          <string>Automatically open the Diosysclient port on the router. This only works when your router supports UPnP and it is enabled.</string>
+          <string>Automatically open the Diosys client port on the router. This only works when your router supports UPnP and it is enabled.</string>
          </property>
          <property name="text">
           <string>Map port using &amp;UPnP</string>
@@ -149,7 +149,7 @@
        <item>
         <widget class="QCheckBox" name="connectSocks">
          <property name="toolTip">
-          <string>Connect to the Diosysnetwork through a SOCKS proxy (e.g. when connecting through Tor).</string>
+          <string>Connect to the Diosys network through a SOCKS proxy (e.g. when connecting through Tor).</string>
          </property>
          <property name="text">
           <string>&amp;Connect through SOCKS proxy:</string>
@@ -323,7 +323,7 @@
          <item>
           <widget class="QValueComboBox" name="lang">
            <property name="toolTip">
-            <string>The user interface language can be set here. This setting will take effect after restarting Diosys</string>
+            <string>The user interface language can be set here. This setting will take effect after restarting Diosys.</string>
            </property>
           </widget>
          </item>
@@ -356,7 +356,7 @@
        <item>
         <widget class="QCheckBox" name="displayAddresses">
          <property name="toolTip">
-          <string>Whether to show Diosysaddresses in the transaction list or not.</string>
+          <string>Whether to show Diosys addresses in the transaction list or not.</string>
          </property>
          <property name="text">
           <string>&amp;Display addresses in transaction list</string>
@@ -460,9 +460,9 @@
  </widget>
  <customwidgets>
   <customwidget>
-   <class>DiosysmountField</class>
+   <class>DiosysAmountField</class>
    <extends>QSpinBox</extends>
-   <header>diosysmountfield.h</header>
+   <header>diosysamountfield.h</header>
   </customwidget>
   <customwidget>
    <class>QValueComboBox</class>

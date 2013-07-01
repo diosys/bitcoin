@@ -1,15 +1,15 @@
 /*
- * Qt4 diosysGUI.
+ * Qt4 diosys GUI.
  *
  * W.J. van der Laan 2011-2012
- * The DiosysDevelopers 2011-2013
+ * The Diosys Developers 2011-2013
  */
 #ifndef WALLETFRAME_H
 #define WALLETFRAME_H
 
 #include <QFrame>
 
-class DiosysUI;
+class DiosysGUI;
 class ClientModel;
 class WalletModel;
 class WalletStack;
@@ -19,7 +19,7 @@ class WalletFrame : public QFrame
     Q_OBJECT
 
 public:
-    explicit WalletFrame(DiosysUI *_gui = 0);
+    explicit WalletFrame(DiosysGUI *_gui = 0);
     ~WalletFrame();
 
     void setClientModel(ClientModel *clientModel);
@@ -34,7 +34,7 @@ public:
     void showOutOfSyncWarning(bool fShow);
 
 private:
-    DiosysUI *gui;
+    DiosysGUI *gui;
     ClientModel *clientModel;
     WalletStack *walletStack;
 

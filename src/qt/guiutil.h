@@ -16,7 +16,7 @@ class QUrl;
 class QAbstractItemView;
 QT_END_NAMESPACE
 
-/** Utility functions used by the DiosysQt UI.
+/** Utility functions used by the Diosys Qt UI.
  */
 namespace GUIUtil
 {
@@ -24,17 +24,17 @@ namespace GUIUtil
     QString dateTimeStr(const QDateTime &datetime);
     QString dateTimeStr(qint64 nTime);
 
-    // Render Diosysaddresses in monospace font
-    QFont diosysddressFont();
+    // Render Diosys addresses in monospace font
+    QFont diosysAddressFont();
 
     // Set up widgets for address and amounts
     void setupAddressWidget(QLineEdit *widget, QWidget *parent);
     void setupAmountWidget(QLineEdit *widget, QWidget *parent);
 
-    // Parse "diosys" URI into recipient object, return true on successful parsing
-    // See DiosysURI definition discussion here: https://ddiosyslk.org/index.php?topic=33490.0
-    bool parseDiosysRI(const QUrl &uri, SendCoinsRecipient *out);
-    bool parseDiosysRI(QString uri, SendCoinsRecipient *out);
+    // Parse "diosys:" URI into recipient object, return true on successful parsing
+    // See Diosys URI definition discussion here: https://diosystalk.org/index.php?topic=33490.0
+    bool parseDiosysURI(const QUrl &uri, SendCoinsRecipient *out);
+    bool parseDiosysURI(QString uri, SendCoinsRecipient *out);
 
     // HTML escaping for rich text controls
     QString HtmlEscape(const QString& str, bool fMultiLine=false);
@@ -96,7 +96,7 @@ namespace GUIUtil
     bool GetStartOnSystemStartup();
     bool SetStartOnSystemStartup(bool fAutoStart);
 
-    /** Help message for DiosysQt, shown with --help. */
+    /** Help message for Diosys-Qt, shown with --help. */
     class HelpMessageBox : public QMessageBox
     {
         Q_OBJECT

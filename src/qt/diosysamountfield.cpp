@@ -1,7 +1,7 @@
-#include "diosysmountfield.h"
+#include "diosysamountfield.h"
 
 #include "qvaluecombobox.h"
-#include "diosysnits.h"
+#include "diosysunits.h"
 #include "guiconstants.h"
 
 #include <QHBoxLayout>
@@ -10,7 +10,7 @@
 #include <QApplication>
 #include <qmath.h> // for qPow()
 
-DiosysmountField::dDiosysountField(QWidget *parent):
+DiosysAmountField::DiosysAmountField(QWidget *parent):
         QWidget(parent), amount(0), currentUnit(-1)
 {
     amount = new QDoubleSpinBox(this);
@@ -23,7 +23,7 @@ DiosysmountField::dDiosysountField(QWidget *parent):
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(amount);
     unit = new QValueComboBox(this);
-    unit->setModel(new Diosysnits(this));
+    unit->setModel(new DiosysUnits(this));
     layout->addWidget(unit);
     layout->addStretch(1);
     layout->setContentsMargins(0,0,0,0);
@@ -41,7 +41,7 @@ DiosysmountField::dDiosysountField(QWidget *parent):
     unitChanged(unit->currentIndex());
 }
 
-void DiosysmountField::setText(const QString &text)
+void DiosysAmountField::setText(const QString &text)
 {
     if (text.isEmpty())
         amount->clear();
@@ -49,20 +49,20 @@ void DiosysmountField::setText(const QString &text)
         amount->setValue(text.toDouble());
 }
 
-void DiosysmountField::clear()
+void DiosysAmountField::clear()
 {
     amount->clear();
     unit->setCurrentIndex(0);
 }
 
-bool DiosysmountField::validate()
+bool DiosysAmountField::validate()
 {
     bool valid = true;
     if (amount->value() == 0.0)
         valid = false;
-    else if (!Diosysnits::parse(currentUnit, text(), 0))
+    else if (!DiosysUnits::parse(currentUnit, text(), 0))
         valid = false;
-    else if (amount->value() > Diosysnits::maxAmount(currentUnit))
+    else if (amount->value() > DiosysUnits::maxAmount(currentUnit))
         valid = false;
 
     setValid(valid);
@@ -70,7 +70,7 @@ bool DiosysmountField::validate()
     return valid;
 }
 
-void DiosysmountField::setValid(bool valid)
+void DiosysAmountField::setValid(bool valid)
 {
     if (valid)
         amount->setStyleSheet("");
@@ -78,7 +78,7 @@ void DiosysmountField::setValid(bool valid)
         amount->setStyleSheet(STYLE_INVALID);
 }
 
-QString DiosysmountField::text() const
+QString DiosysAmountField::text() const
 {
     if (amount->text().isEmpty())
         return QString();
@@ -86,7 +86,7 @@ QString DiosysmountField::text() const
         return amount->text();
 }
 
-bool DiosysmountField::eventFilter(QObject *object, QEvent *event)
+bool DiosysAmountField::eventFilter(QObject *object, QEvent *event)
 {
     if (event->type() == QEvent::FocusIn)
     {
@@ -107,16 +107,16 @@ bool DiosysmountField::eventFilter(QObject *object, QEvent *event)
     return QWidget::eventFilter(object, event);
 }
 
-QWidget *DiosysmountField::setupTabChain(QWidget *prev)
+QWidget *DiosysAmountField::setupTabChain(QWidget *prev)
 {
     QWidget::setTabOrder(prev, amount);
     return amount;
 }
 
-qint64 DiosysmountField::value(bool *valid_out) const
+qint64 DiosysAmountField::value(bool *valid_out) const
 {
     qint64 val_out = 0;
-    bool valid = Diosysnits::parse(currentUnit, text(), &val_out);
+    bool valid = DiosysUnits::parse(currentUnit, text(), &val_out);
     if (valid_out)
     {
         *valid_out = valid;
@@ -124,18 +124,18 @@ qint64 DiosysmountField::value(bool *valid_out) const
     return val_out;
 }
 
-void DiosysmountField::setValue(qint64 value)
+void DiosysAmountField::setValue(qint64 value)
 {
-    setText(Diosysnits::format(currentUnit, value));
+    setText(DiosysUnits::format(currentUnit, value));
 }
 
-void DiosysmountField::unitChanged(int idx)
+void DiosysAmountField::unitChanged(int idx)
 {
     // Use description tooltip for current unit for the combobox
     unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
 
     // Determine new unit ID
-    int newUnit = unit->itemData(idx, Diosysnits::UnitRole).toInt();
+    int newUnit = unit->itemData(idx, DiosysUnits::UnitRole).toInt();
 
     // Parse current value and convert to new unit
     bool valid = false;
@@ -144,10 +144,10 @@ void DiosysmountField::unitChanged(int idx)
     currentUnit = newUnit;
 
     // Set max length after retrieving the value, to prevent truncation
-    amount->setDecimals(Diosysnits::decimals(currentUnit));
-    amount->setMaximum(qPow(10, Diosysnits::amountDigits(currentUnit)) - qPow(10, -amount->decimals()));
+    amount->setDecimals(DiosysUnits::decimals(currentUnit));
+    amount->setMaximum(qPow(10, DiosysUnits::amountDigits(currentUnit)) - qPow(10, -amount->decimals()));
 
-    if (currentUnit == Diosysnits::uDIO)
+    if (currentUnit == DiosysUnits::uDIO)
         amount->setSingleStep(0.01);
     else
         amount->setSingleStep(0.001);
@@ -165,7 +165,7 @@ void DiosysmountField::unitChanged(int idx)
     setValid(true);
 }
 
-void DiosysmountField::setDisplayUnit(int newUnit)
+void DiosysAmountField::setDisplayUnit(int newUnit)
 {
     unit->setValue(newUnit);
 }

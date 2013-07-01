@@ -1,11 +1,11 @@
 /*
- * Qt4 diosysGUI.
+ * Qt4 diosys GUI.
  *
  * W.J. van der Laan 2011-2012
- * The DiosysDevelopers 2011-2013
+ * The Diosys Developers 2011-2013
  */
 #include "walletview.h"
-#include "diosysui.h"
+#include "diosysgui.h"
 #include "transactiontablemodel.h"
 #include "addressbookpage.h"
 #include "sendcoinsdialog.h"
@@ -29,7 +29,7 @@
 #include <QFileDialog>
 #include <QPushButton>
 
-WalletView::WalletView(QWidget *parent, DiosysUI *_gui):
+WalletView::WalletView(QWidget *parent, DiosysGUI *_gui):
     QStackedWidget(parent),
     gui(_gui),
     clientModel(0),
@@ -90,7 +90,7 @@ WalletView::~WalletView()
 {
 }
 
-void WalletView::setDiosysUI(dDiosysI *gui)
+void WalletView::setDiosysGUI(DiosysGUI *gui)
 {
     this->gui = gui;
 }

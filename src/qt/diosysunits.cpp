@@ -1,23 +1,23 @@
-#include "diosysnits.h"
+#include "diosysunits.h"
 
 #include <QStringList>
 
-Diosysnits::dDiosysits(QObject *parent):
+DiosysUnits::DiosysUnits(QObject *parent):
         QAbstractListModel(parent),
         unitlist(availableUnits())
 {
 }
 
-QList<Diosysnits::Unit> dDiosysits::availableUnits()
+QList<DiosysUnits::Unit> DiosysUnits::availableUnits()
 {
-    QList<Diosysnits::Unit> unitlist;
+    QList<DiosysUnits::Unit> unitlist;
     unitlist.append(DIO);
     unitlist.append(mDIO);
     unitlist.append(uDIO);
     return unitlist;
 }
 
-bool Diosysnits::valid(int unit)
+bool DiosysUnits::valid(int unit)
 {
     switch(unit)
     {
@@ -30,7 +30,7 @@ bool Diosysnits::valid(int unit)
     }
 }
 
-QString Diosysnits::name(int unit)
+QString DiosysUnits::name(int unit)
 {
     switch(unit)
     {
@@ -41,18 +41,18 @@ QString Diosysnits::name(int unit)
     }
 }
 
-QString Diosysnits::description(int unit)
+QString DiosysUnits::description(int unit)
 {
     switch(unit)
     {
-    case DIO: return QString("Diosys");
-    case mDIO: return QString("Milli-Diosys (1 / 1,000)");
-    case uDIO: return QString("Micro-Diosys (1 / 1,000,000)");
+    case DIO: return QString("Diosyss");
+    case mDIO: return QString("Milli-Diosyss (1 / 1,000)");
+    case uDIO: return QString("Micro-Diosyss (1 / 1,000,000)");
     default: return QString("???");
     }
 }
 
-qint64 Diosysnits::factor(int unit)
+qint64 DiosysUnits::factor(int unit)
 {
     switch(unit)
     {
@@ -63,7 +63,7 @@ qint64 Diosysnits::factor(int unit)
     }
 }
 
-qint64 Diosysnits::maxAmount(int unit)
+qint64 DiosysUnits::maxAmount(int unit)
 {
     switch(unit)
     {
@@ -74,7 +74,7 @@ qint64 Diosysnits::maxAmount(int unit)
     }
 }
 
-int Diosysnits::amountDigits(int unit)
+int DiosysUnits::amountDigits(int unit)
 {
     switch(unit)
     {
@@ -85,7 +85,7 @@ int Diosysnits::amountDigits(int unit)
     }
 }
 
-int Diosysnits::decimals(int unit)
+int DiosysUnits::decimals(int unit)
 {
     switch(unit)
     {
@@ -96,7 +96,7 @@ int Diosysnits::decimals(int unit)
     }
 }
 
-QString Diosysnits::format(int unit, qint64 n, bool fPlus)
+QString DiosysUnits::format(int unit, qint64 n, bool fPlus)
 {
     // Note: not using straight sprintf here because we do NOT want
     // localized number formatting.
@@ -123,12 +123,12 @@ QString Diosysnits::format(int unit, qint64 n, bool fPlus)
     return quotient_str + QString(".") + remainder_str;
 }
 
-QString Diosysnits::formatWithUnit(int unit, qint64 amount, bool plussign)
+QString DiosysUnits::formatWithUnit(int unit, qint64 amount, bool plussign)
 {
     return format(unit, amount, plussign) + QString(" ") + name(unit);
 }
 
-bool Diosysnits::parse(int unit, const QString &value, qint64 *val_out)
+bool DiosysUnits::parse(int unit, const QString &value, qint64 *val_out)
 {
     if(!valid(unit) || value.isEmpty())
         return false; // Refuse to parse invalid unit or empty string
@@ -165,13 +165,13 @@ bool Diosysnits::parse(int unit, const QString &value, qint64 *val_out)
     return ok;
 }
 
-int Diosysnits::rowCount(const QModelIndex &parent) const
+int DiosysUnits::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent);
     return unitlist.size();
 }
 
-QVariant Diosysnits::data(const QModelIndex &index, int role) const
+QVariant DiosysUnits::data(const QModelIndex &index, int role) const
 {
     int row = index.row();
     if(row >= 0 && row < unitlist.size())

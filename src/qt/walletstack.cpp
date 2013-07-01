@@ -1,12 +1,12 @@
 /*
- * Qt4 diosysGUI.
+ * Qt4 diosys GUI.
  *
  * W.J. van der Laan 2011-2012
- * The DiosysDevelopers 2011-2013
+ * The Diosys Developers 2011-2013
  */
 #include "walletstack.h"
 #include "walletview.h"
-#include "diosysui.h"
+#include "diosysgui.h"
 
 #include <QMap>
 #include <QMessageBox>
@@ -29,7 +29,7 @@ bool WalletStack::addWallet(const QString& name, WalletModel *walletModel)
         return false;
 
     WalletView *walletView = new WalletView(this, gui);
-    walletView->setDiosysUI(gui);
+    walletView->setDiosysGUI(gui);
     walletView->setClientModel(clientModel);
     walletView->setWalletModel(walletModel);
     walletView->showOutOfSyncWarning(bOutOfSync);

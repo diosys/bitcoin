@@ -2,9 +2,9 @@
 
 #include "guiutil.h"
 
-#include "diosysddressvalidator.h"
+#include "diosysaddressvalidator.h"
 #include "walletmodel.h"
-#include "diosysnits.h"
+#include "diosysunits.h"
 
 #include "util.h"
 #include "init.h"
@@ -58,7 +58,7 @@ QString dateTimeStr(qint64 nTime)
     return dateTimeStr(QDateTime::fromTime_t((qint32)nTime));
 }
 
-QFont diosysddressFont()
+QFont diosysAddressFont()
 {
     QFont font("Monospace");
     font.setStyleHint(QFont::TypeWriter);
@@ -67,9 +67,9 @@ QFont diosysddressFont()
 
 void setupAddressWidget(QLineEdit *widget, QWidget *parent)
 {
-    widget->setMaxLength(DiosysddressValidator::MaxAddressLength);
-    widget->setValidator(new DiosysddressValidator(parent));
-    widget->setFont(diosysddressFont());
+    widget->setMaxLength(DiosysAddressValidator::MaxAddressLength);
+    widget->setValidator(new DiosysAddressValidator(parent));
+    widget->setFont(diosysAddressFont());
 }
 
 void setupAmountWidget(QLineEdit *widget, QWidget *parent)
@@ -81,10 +81,10 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
     widget->setAlignment(Qt::AlignRight|Qt::AlignVCenter);
 }
 
-bool parseDiosysRI(const QUrl &uri, SendCoinsRecipient *out)
+bool parseDiosysURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    // return if URI is not valid or is no diosysURI
-    if(!uri.isValid() || uri.scheme() != QString("diosys))
+    // return if URI is not valid or is no diosys URI
+    if(!uri.isValid() || uri.scheme() != QString("diosys"))
         return false;
 
     SendCoinsRecipient rv;
@@ -115,7 +115,7 @@ bool parseDiosysRI(const QUrl &uri, SendCoinsRecipient *out)
         {
             if(!i->second.isEmpty())
             {
-                if(!Diosysnits::parse(dDiosysits::DIO, i->second, &rv.amount))
+                if(!DiosysUnits::parse(DiosysUnits::DIO, i->second, &rv.amount))
                 {
                     return false;
                 }
@@ -133,17 +133,18 @@ bool parseDiosysRI(const QUrl &uri, SendCoinsRecipient *out)
     return true;
 }
 
-bool parseDiosysRI(QString uri, SendCoinsRecipient *out)
+bool parseDiosysURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert diosys// to ddiosys    //
-    //    Cannot handle this later, because diosys// will cause Qt to see the part after // as host,
+    // Convert diosys:// to diosys:
+    //
+    //    Cannot handle this later, because diosys:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("diosys//"))
+    if(uri.startsWith("diosys://"))
     {
-        uri.replace(0, 10, "diosys");
+        uri.replace(0, 10, "diosys:");
     }
     QUrl uriInstance(uri);
-    return parseDiosysRI(uriInstance, out);
+    return parseDiosysURI(uriInstance, out);
 }
 
 QString HtmlEscape(const QString& str, bool fMultiLine)
@@ -294,12 +295,12 @@ bool ToolTipToRichTextFilter::eventFilter(QObject *obj, QEvent *evt)
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "Diosyslnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "Diosys.lnk";
 }
 
 bool GetStartOnSystemStartup()
 {
-    // check for Diosyslnk
+    // check for Diosys.lnk
     return boost::filesystem::exists(StartupShortcutPath());
 }
 
@@ -376,7 +377,7 @@ boost::filesystem::path static GetAutostartDir()
 
 boost::filesystem::path static GetAutostartFilePath()
 {
-    return GetAutostartDir() / "diosysdesktop";
+    return GetAutostartDir() / "diosys.desktop";
 }
 
 bool GetStartOnSystemStartup()
@@ -414,10 +415,10 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         boost::filesystem::ofstream optionFile(GetAutostartFilePath(), std::ios_base::out|std::ios_base::trunc);
         if (!optionFile.good())
             return false;
-        // Write a diosysdesktop file to the autostart directory:
+        // Write a diosys.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        optionFile << "Name=Diosysn";
+        optionFile << "Name=Diosys\n";
         optionFile << "Exec=" << pszExePath << " -min\n";
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -436,7 +437,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl);
 LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef findUrl)
 {
-    // loop through the list of startup items and try to find the diosysapp
+    // loop through the list of startup items and try to find the diosys app
     CFArrayRef listSnapshot = LSSharedFileListCopySnapshot(list, NULL);
     for(int i = 0; i < CFArrayGetCount(listSnapshot); i++) {
         LSSharedFileListItemRef item = (LSSharedFileListItemRef)CFArrayGetValueAtIndex(listSnapshot, i);
@@ -457,21 +458,21 @@ LSSharedFileListItemRef findStartupItemInList(LSSharedFileListRef list, CFURLRef
 
 bool GetStartOnSystemStartup()
 {
-    CFURLRef diosysppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    CFURLRef diosysAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
     LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, diosysppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, diosysAppUrl);
     return !!foundItem; // return boolified object
 }
 
 bool SetStartOnSystemStartup(bool fAutoStart)
 {
-    CFURLRef diosysppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
+    CFURLRef diosysAppUrl = CFBundleCopyBundleURL(CFBundleGetMainBundle());
     LSSharedFileListRef loginItems = LSSharedFileListCreate(NULL, kLSSharedFileListSessionLoginItems, NULL);
-    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, diosysppUrl);
+    LSSharedFileListItemRef foundItem = findStartupItemInList(loginItems, diosysAppUrl);
 
     if(fAutoStart && !foundItem) {
-        // add diosysapp to startup item list
-        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, diosysppUrl, NULL, NULL);
+        // add diosys app to startup item list
+        LSSharedFileListInsertItemURL(loginItems, kLSSharedFileListItemBeforeFirst, NULL, NULL, diosysAppUrl, NULL, NULL);
     }
     else if(!fAutoStart && foundItem) {
         // remove item
@@ -489,10 +490,10 @@ bool SetStartOnSystemStartup(bool fAutoStart) { return false; }
 HelpMessageBox::HelpMessageBox(QWidget *parent) :
     QMessageBox(parent)
 {
-    header = tr("DiosysQt") + " " + tr("version") + " " +
+    header = tr("Diosys-Qt") + " " + tr("version") + " " +
         QString::fromStdString(FormatFullVersion()) + "\n\n" +
         tr("Usage:") + "\n" +
-        "  diosysqt [" + tr("command-line options") + "]                     " + "\n";
+        "  diosys-qt [" + tr("command-line options") + "]                     " + "\n";
 
     coreOptions = QString::fromStdString(HelpMessage());
 
@@ -501,7 +502,7 @@ HelpMessageBox::HelpMessageBox(QWidget *parent) :
         "  -min                   " + tr("Start minimized") + "\n" +
         "  -splash                " + tr("Show splash screen on startup (default: 1)") + "\n";
 
-    setWindowTitle(tr("DiosysQt"));
+    setWindowTitle(tr("Diosys-Qt"));
     setTextFormat(Qt::PlainText);
     // setMinimumWidth is ignored for QMessageBox so put in non-breaking spaces to make it wider.
     setText(header + QString(QChar(0x2003)).repeated(50));

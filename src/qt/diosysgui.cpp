@@ -1,13 +1,13 @@
 /*
- * Qt4 diosysGUI.
+ * Qt4 diosys GUI.
  *
  * W.J. van der Laan 2011-2012
- * The DiosysDevelopers 2011-2012
+ * The Diosys Developers 2011-2012
  */
 
 #include <QApplication>
 
-#include "diosysui.h"
+#include "diosysgui.h"
 
 #include "transactiontablemodel.h"
 #include "optionsdialog.h"
@@ -17,7 +17,7 @@
 #include "walletframe.h"
 #include "optionsmodel.h"
 #include "transactiondescdialog.h"
-#include "diosysnits.h"
+#include "diosysunits.h"
 #include "guiconstants.h"
 #include "notificator.h"
 #include "guiutil.h"
@@ -55,9 +55,9 @@
 
 #include <iostream>
 
-const QString DiosysUI::DEFAULT_WALLET = "~Default";
+const QString DiosysGUI::DEFAULT_WALLET = "~Default";
 
-DiosysUI::dDiosysI(bool fIsTestnet, QWidget *parent) :
+DiosysGUI::DiosysGUI(bool fIsTestnet, QWidget *parent) :
     QMainWindow(parent),
     clientModel(0),
     encryptWalletAction(0),
@@ -73,24 +73,24 @@ DiosysUI::dDiosysI(bool fIsTestnet, QWidget *parent) :
 #ifndef Q_OS_MAC
     if (!fIsTestnet)
     {
-        setWindowTitle(tr("Diosys) + " - " + tr("Wallet"));
-        QApplication::setWindowIcon(QIcon(":icons/diosys));
-        setWindowIcon(QIcon(":icons/diosys));
+        setWindowTitle(tr("Diosys") + " - " + tr("Wallet"));
+        QApplication::setWindowIcon(QIcon(":icons/diosys"));
+        setWindowIcon(QIcon(":icons/diosys"));
     }
     else
     {
-        setWindowTitle(tr("Diosys) + " - " + tr("Wallet") + " " + tr("[testnet]"));
-        QApplication::setWindowIcon(QIcon(":icons/diosystestnet"));
-        setWindowIcon(QIcon(":icons/diosystestnet"));
+        setWindowTitle(tr("Diosys") + " - " + tr("Wallet") + " " + tr("[testnet]"));
+        QApplication::setWindowIcon(QIcon(":icons/diosys_testnet"));
+        setWindowIcon(QIcon(":icons/diosys_testnet"));
     }
 #else
     setUnifiedTitleAndToolBarOnMac(true);
     QApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 
     if (!fIsTestnet)
-        MacDockIconHandler::instance()->setIcon(QIcon(":icons/diosys));
+        MacDockIconHandler::instance()->setIcon(QIcon(":icons/diosys"));
     else
-        MacDockIconHandler::instance()->setIcon(QIcon(":icons/diosystestnet"));
+        MacDockIconHandler::instance()->setIcon(QIcon(":icons/diosys_testnet"));
 #endif
 
     // Create wallet frame and make it the central widget
@@ -164,7 +164,7 @@ DiosysUI::dDiosysI(bool fIsTestnet, QWidget *parent) :
     this->installEventFilter(this);
 }
 
-DiosysUI::~dDiosysI()
+DiosysGUI::~DiosysGUI()
 {
     saveWindowGeometry();
     if(trayIcon) // Hide tray icon, as deleting will let it linger until quit (on Ubuntu)
@@ -175,7 +175,7 @@ DiosysUI::~dDiosysI()
 #endif
 }
 
-void DiosysUI::createActions(bool fIsTestnet)
+void DiosysGUI::createActions(bool fIsTestnet)
 {
     QActionGroup *tabGroup = new QActionGroup(this);
 
@@ -187,7 +187,7 @@ void DiosysUI::createActions(bool fIsTestnet)
     tabGroup->addAction(overviewAction);
 
     sendCoinsAction = new QAction(QIcon(":/icons/send"), tr("&Send"), this);
-    sendCoinsAction->setStatusTip(tr("Send coins to a Diosysaddress"));
+    sendCoinsAction->setStatusTip(tr("Send coins to a Diosys address"));
     sendCoinsAction->setToolTip(sendCoinsAction->statusTip());
     sendCoinsAction->setCheckable(true);
     sendCoinsAction->setShortcut(QKeySequence(Qt::ALT + Qt::Key_2));
@@ -230,21 +230,21 @@ void DiosysUI::createActions(bool fIsTestnet)
     quitAction->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     quitAction->setMenuRole(QAction::QuitRole);
     if (!fIsTestnet)
-        aboutAction = new QAction(QIcon(":/icons/diosys), tr("&About dDiosys, this);
+        aboutAction = new QAction(QIcon(":/icons/diosys"), tr("&About Diosys"), this);
     else
-        aboutAction = new QAction(QIcon(":/icons/diosystestnet"), tr("&About dDiosys, this);
-    aboutAction->setStatusTip(tr("Show information about Diosys));
+        aboutAction = new QAction(QIcon(":/icons/diosys_testnet"), tr("&About Diosys"), this);
+    aboutAction->setStatusTip(tr("Show information about Diosys"));
     aboutAction->setMenuRole(QAction::AboutRole);
     aboutQtAction = new QAction(QIcon(":/trolltech/qmessagebox/images/qtlogo-64.png"), tr("About &Qt"), this);
     aboutQtAction->setStatusTip(tr("Show information about Qt"));
     aboutQtAction->setMenuRole(QAction::AboutQtRole);
     optionsAction = new QAction(QIcon(":/icons/options"), tr("&Options..."), this);
-    optionsAction->setStatusTip(tr("Modify configuration options for Diosys));
+    optionsAction->setStatusTip(tr("Modify configuration options for Diosys"));
     optionsAction->setMenuRole(QAction::PreferencesRole);
     if (!fIsTestnet)
-        toggleHideAction = new QAction(QIcon(":/icons/diosys), tr("&Show / Hide"), this);
+        toggleHideAction = new QAction(QIcon(":/icons/diosys"), tr("&Show / Hide"), this);
     else
-        toggleHideAction = new QAction(QIcon(":/icons/diosystestnet"), tr("&Show / Hide"), this);
+        toggleHideAction = new QAction(QIcon(":/icons/diosys_testnet"), tr("&Show / Hide"), this);
     toggleHideAction->setStatusTip(tr("Show or hide the main Window"));
 
     encryptWalletAction = new QAction(QIcon(":/icons/lock_closed"), tr("&Encrypt Wallet..."), this);
@@ -255,9 +255,9 @@ void DiosysUI::createActions(bool fIsTestnet)
     changePassphraseAction = new QAction(QIcon(":/icons/key"), tr("&Change Passphrase..."), this);
     changePassphraseAction->setStatusTip(tr("Change the passphrase used for wallet encryption"));
     signMessageAction = new QAction(QIcon(":/icons/edit"), tr("Sign &message..."), this);
-    signMessageAction->setStatusTip(tr("Sign messages with your Diosysaddresses to prove you own them"));
+    signMessageAction->setStatusTip(tr("Sign messages with your Diosys addresses to prove you own them"));
     verifyMessageAction = new QAction(QIcon(":/icons/transaction_0"), tr("&Verify message..."), this);
-    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Diosysaddresses"));
+    verifyMessageAction->setStatusTip(tr("Verify messages to ensure they were signed with specified Diosys addresses"));
 
     openRPCConsoleAction = new QAction(QIcon(":/icons/debugwindow"), tr("&Debug window"), this);
     openRPCConsoleAction->setStatusTip(tr("Open debugging and diagnostic console"));
@@ -274,7 +274,7 @@ void DiosysUI::createActions(bool fIsTestnet)
     connect(verifyMessageAction, SIGNAL(triggered()), this, SLOT(gotoVerifyMessageTab()));
 }
 
-void DiosysUI::createMenuBar()
+void DiosysGUI::createMenuBar()
 {
 #ifdef Q_OS_MAC
     // Create a decoupled menu bar on Mac which stays even if the window is closed
@@ -305,7 +305,7 @@ void DiosysUI::createMenuBar()
     help->addAction(aboutQtAction);
 }
 
-void DiosysUI::createToolBars()
+void DiosysGUI::createToolBars()
 {
     QToolBar *toolbar = addToolBar(tr("Tabs toolbar"));
     toolbar->setToolButtonStyle(Qt::ToolButtonTextBesideIcon);
@@ -316,7 +316,7 @@ void DiosysUI::createToolBars()
     toolbar->addAction(addressBookAction);
 }
 
-void DiosysUI::setClientModel(ClientModel *clientModel)
+void DiosysGUI::setClientModel(ClientModel *clientModel)
 {
     this->clientModel = clientModel;
     if(clientModel)
@@ -340,34 +340,34 @@ void DiosysUI::setClientModel(ClientModel *clientModel)
     }
 }
 
-bool DiosysUI::addWallet(const QString& name, WalletModel *walletModel)
+bool DiosysGUI::addWallet(const QString& name, WalletModel *walletModel)
 {
     return walletFrame->addWallet(name, walletModel);
 }
 
-bool DiosysUI::setCurrentWallet(const QString& name)
+bool DiosysGUI::setCurrentWallet(const QString& name)
 {
     return walletFrame->setCurrentWallet(name);
 }
 
-void DiosysUI::removeAllWallets()
+void DiosysGUI::removeAllWallets()
 {
     walletFrame->removeAllWallets();
 }
 
-void DiosysUI::createTrayIcon(bool fIsTestnet)
+void DiosysGUI::createTrayIcon(bool fIsTestnet)
 {
 #ifndef Q_OS_MAC
     trayIcon = new QSystemTrayIcon(this);
 
     if (!fIsTestnet)
     {
-        trayIcon->setToolTip(tr("Diosysclient"));
+        trayIcon->setToolTip(tr("Diosys client"));
         trayIcon->setIcon(QIcon(":/icons/toolbar"));
     }
     else
     {
-        trayIcon->setToolTip(tr("Diosysclient") + " " + tr("[testnet]"));
+        trayIcon->setToolTip(tr("Diosys client") + " " + tr("[testnet]"));
         trayIcon->setIcon(QIcon(":/icons/toolbar_testnet"));
     }
 
@@ -377,7 +377,7 @@ void DiosysUI::createTrayIcon(bool fIsTestnet)
     notificator = new Notificator(QApplication::applicationName(), trayIcon);
 }
 
-void DiosysUI::createTrayIconMenu()
+void DiosysGUI::createTrayIconMenu()
 {
     QMenu *trayIconMenu;
 #ifndef Q_OS_MAC
@@ -415,7 +415,7 @@ void DiosysUI::createTrayIconMenu()
 }
 
 #ifndef Q_OS_MAC
-void DiosysUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
+void DiosysGUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 {
     if(reason == QSystemTrayIcon::Trigger)
     {
@@ -425,14 +425,14 @@ void DiosysUI::trayIconActivated(QSystemTrayIcon::ActivationReason reason)
 }
 #endif
 
-void DiosysUI::saveWindowGeometry()
+void DiosysGUI::saveWindowGeometry()
 {
     QSettings settings;
     settings.setValue("nWindowPos", pos());
     settings.setValue("nWindowSize", size());
 }
 
-void DiosysUI::restoreWindowGeometry()
+void DiosysGUI::restoreWindowGeometry()
 {
     QSettings settings;
     QPoint pos = settings.value("nWindowPos").toPoint();
@@ -447,7 +447,7 @@ void DiosysUI::restoreWindowGeometry()
     move(pos);
 }
 
-void DiosysUI::optionsClicked()
+void DiosysGUI::optionsClicked()
 {
     if(!clientModel || !clientModel->getOptionsModel())
         return;
@@ -456,49 +456,49 @@ void DiosysUI::optionsClicked()
     dlg.exec();
 }
 
-void DiosysUI::aboutClicked()
+void DiosysGUI::aboutClicked()
 {
     AboutDialog dlg;
     dlg.setModel(clientModel);
     dlg.exec();
 }
 
-void DiosysUI::gotoOverviewPage()
+void DiosysGUI::gotoOverviewPage()
 {
     if (walletFrame) walletFrame->gotoOverviewPage();
 }
 
-void DiosysUI::gotoHistoryPage()
+void DiosysGUI::gotoHistoryPage()
 {
     if (walletFrame) walletFrame->gotoHistoryPage();
 }
 
-void DiosysUI::gotoAddressBookPage()
+void DiosysGUI::gotoAddressBookPage()
 {
     if (walletFrame) walletFrame->gotoAddressBookPage();
 }
 
-void DiosysUI::gotoReceiveCoinsPage()
+void DiosysGUI::gotoReceiveCoinsPage()
 {
     if (walletFrame) walletFrame->gotoReceiveCoinsPage();
 }
 
-void DiosysUI::gotoSendCoinsPage(QString addr)
+void DiosysGUI::gotoSendCoinsPage(QString addr)
 {
     if (walletFrame) walletFrame->gotoSendCoinsPage(addr);
 }
 
-void DiosysUI::gotoSignMessageTab(QString addr)
+void DiosysGUI::gotoSignMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoSignMessageTab(addr);
 }
 
-void DiosysUI::gotoVerifyMessageTab(QString addr)
+void DiosysGUI::gotoVerifyMessageTab(QString addr)
 {
     if (walletFrame) walletFrame->gotoVerifyMessageTab(addr);
 }
 
-void DiosysUI::setNumConnections(int count)
+void DiosysGUI::setNumConnections(int count)
 {
     QString icon;
     switch(count)
@@ -510,10 +510,10 @@ void DiosysUI::setNumConnections(int count)
     default: icon = ":/icons/connect_4"; break;
     }
     labelConnectionsIcon->setPixmap(QIcon(icon).pixmap(STATUSBAR_ICONSIZE,STATUSBAR_ICONSIZE));
-    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Diosysnetwork", "", count));
+    labelConnectionsIcon->setToolTip(tr("%n active connection(s) to Diosys network", "", count));
 }
 
-void DiosysUI::setNumBlocks(int count, int nTotalBlocks)
+void DiosysGUI::setNumBlocks(int count, int nTotalBlocks)
 {
     // Prevent orphan statusbar messages (e.g. hover Quit in main menu, wait until chain-sync starts -> garbelled text)
     statusBar()->clearMessage();
@@ -607,9 +607,9 @@ void DiosysUI::setNumBlocks(int count, int nTotalBlocks)
     progressBar->setToolTip(tooltip);
 }
 
-void DiosysUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
+void DiosysGUI::message(const QString &title, const QString &message, unsigned int style, bool *ret)
 {
-    QString strTitle = tr("Diosys); // default title
+    QString strTitle = tr("Diosys"); // default title
     // Default to information icon
     int nMBoxIcon = QMessageBox::Information;
     int nNotifyIcon = Notificator::Information;
@@ -658,7 +658,7 @@ void DiosysUI::message(const QString &title, const QString &message, unsigned in
         notificator->notify((Notificator::Class)nNotifyIcon, strTitle, message);
 }
 
-void DiosysUI::changeEvent(QEvent *e)
+void DiosysGUI::changeEvent(QEvent *e)
 {
     QMainWindow::changeEvent(e);
 #ifndef Q_OS_MAC // Ignored on Mac
@@ -677,7 +677,7 @@ void DiosysUI::changeEvent(QEvent *e)
 #endif
 }
 
-void DiosysUI::closeEvent(QCloseEvent *event)
+void DiosysGUI::closeEvent(QCloseEvent *event)
 {
     if(clientModel)
     {
@@ -692,18 +692,18 @@ void DiosysUI::closeEvent(QCloseEvent *event)
     QMainWindow::closeEvent(event);
 }
 
-void DiosysUI::askFee(qint64 nFeeRequired, bool *payFee)
+void DiosysGUI::askFee(qint64 nFeeRequired, bool *payFee)
 {
     QString strMessage = tr("This transaction is over the size limit. You can still send it for a fee of %1, "
         "which goes to the nodes that process your transaction and helps to support the network. "
-        "Do you want to pay the fee?").arg(Diosysnits::formatWithUnit(dDiosysits::DIO, nFeeRequired));
+        "Do you want to pay the fee?").arg(DiosysUnits::formatWithUnit(DiosysUnits::DIO, nFeeRequired));
     QMessageBox::StandardButton retval = QMessageBox::question(
           this, tr("Confirm transaction fee"), strMessage,
           QMessageBox::Yes|QMessageBox::Cancel, QMessageBox::Yes);
     *payFee = (retval == QMessageBox::Yes);
 }
 
-void DiosysUI::incomingTransaction(const QString& date, int unit, qint64 amount, const QString& type, const QString& address)
+void DiosysGUI::incomingTransaction(const QString& date, int unit, qint64 amount, const QString& type, const QString& address)
 {
     // On new transaction, make an info balloon
     message((amount)<0 ? tr("Sent transaction") : tr("Incoming transaction"),
@@ -712,19 +712,19 @@ void DiosysUI::incomingTransaction(const QString& date, int unit, qint64 amount,
                 "Type: %3\n"
                 "Address: %4\n")
                   .arg(date)
-                  .arg(Diosysnits::formatWithUnit(unit, amount, true))
+                  .arg(DiosysUnits::formatWithUnit(unit, amount, true))
                   .arg(type)
                   .arg(address), CClientUIInterface::MSG_INFORMATION);
 }
 
-void DiosysUI::dragEnterEvent(QDragEnterEvent *event)
+void DiosysGUI::dragEnterEvent(QDragEnterEvent *event)
 {
     // Accept only URIs
     if(event->mimeData()->hasUrls())
         event->acceptProposedAction();
 }
 
-void DiosysUI::dropEvent(QDropEvent *event)
+void DiosysGUI::dropEvent(QDropEvent *event)
 {
     if(event->mimeData()->hasUrls())
     {
@@ -740,14 +740,14 @@ void DiosysUI::dropEvent(QDropEvent *event)
         if (nValidUrisFound)
             walletFrame->gotoSendCoinsPage();
         else
-            message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid Diosysaddress or malformed URI parameters."),
+            message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid Diosys address or malformed URI parameters."),
                       CClientUIInterface::ICON_WARNING);
     }
 
     event->acceptProposedAction();
 }
 
-bool DiosysUI::eventFilter(QObject *object, QEvent *event)
+bool DiosysGUI::eventFilter(QObject *object, QEvent *event)
 {
     // Catch status tip events
     if (event->type() == QEvent::StatusTip)
@@ -759,15 +759,15 @@ bool DiosysUI::eventFilter(QObject *object, QEvent *event)
     return QMainWindow::eventFilter(object, event);
 }
 
-void DiosysUI::handleURI(QString strURI)
+void DiosysGUI::handleURI(QString strURI)
 {
     // URI has to be valid
     if (!walletFrame->handleURI(strURI))
-        message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid Diosysaddress or malformed URI parameters."),
+        message(tr("URI handling"), tr("URI can not be parsed! This can be caused by an invalid Diosys address or malformed URI parameters."),
                   CClientUIInterface::ICON_WARNING);
 }
 
-void DiosysUI::setEncryptionStatus(int status)
+void DiosysGUI::setEncryptionStatus(int status)
 {
     switch(status)
     {
@@ -796,7 +796,7 @@ void DiosysUI::setEncryptionStatus(int status)
     }
 }
 
-void DiosysUI::showNormalIfMinimized(bool fToggleHidden)
+void DiosysGUI::showNormalIfMinimized(bool fToggleHidden)
 {
     // activateWindow() (sometimes) helps with keyboard focus on Windows
     if (isHidden())
@@ -818,12 +818,12 @@ void DiosysUI::showNormalIfMinimized(bool fToggleHidden)
         hide();
 }
 
-void DiosysUI::toggleHidden()
+void DiosysGUI::toggleHidden()
 {
     showNormalIfMinimized(true);
 }
 
-void DiosysUI::detectShutdown()
+void DiosysGUI::detectShutdown()
 {
     if (ShutdownRequested())
         QMetaObject::invokeMethod(QCoreApplication::instance(), "quit", Qt::QueuedConnection);

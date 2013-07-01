@@ -46,9 +46,9 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 sub.credit = txout.nValue;
                 if (ExtractDestination(txout.scriptPubKey, address) && IsMine(*wallet, address))
                 {
-                    // Received by DiosysAddress
+                    // Received by Diosys Address
                     sub.type = TransactionRecord::RecvWithAddress;
-                    sub.address = CDiosysddress(address).ToString();
+                    sub.address = CDiosysAddress(address).ToString();
                 }
                 else
                 {
@@ -107,9 +107,9 @@ QList<TransactionRecord> TransactionRecord::decomposeTransaction(const CWallet *
                 CTxDestination address;
                 if (ExtractDestination(txout.scriptPubKey, address))
                 {
-                    // Sent to DiosysAddress
+                    // Sent to Diosys Address
                     sub.type = TransactionRecord::SendToAddress;
-                    sub.address = CDiosysddress(address).ToString();
+                    sub.address = CDiosysAddress(address).ToString();
                 }
                 else
                 {

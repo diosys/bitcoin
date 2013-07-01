@@ -1,15 +1,15 @@
 /*
- * Qt4 diosysGUI.
+ * Qt4 diosys GUI.
  *
  * W.J. van der Laan 2011-2012
- * The DiosysDevelopers 2011-2013
+ * The Diosys Developers 2011-2013
  */
 #ifndef WALLETVIEW_H
 #define WALLETVIEW_H
 
 #include <QStackedWidget>
 
-class DiosysUI;
+class DiosysGUI;
 class ClientModel;
 class WalletModel;
 class TransactionView;
@@ -35,16 +35,16 @@ class WalletView : public QStackedWidget
     Q_OBJECT
 
 public:
-    explicit WalletView(QWidget *parent, DiosysUI *_gui);
+    explicit WalletView(QWidget *parent, DiosysGUI *_gui);
     ~WalletView();
 
-    void setDiosysUI(dDiosysI *gui);
+    void setDiosysGUI(DiosysGUI *gui);
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
     */
     void setClientModel(ClientModel *clientModel);
     /** Set the wallet model.
-        The wallet model represents a diosyswallet, and offers access to the list of transactions, address book and sending
+        The wallet model represents a diosys wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
     void setWalletModel(WalletModel *walletModel);
@@ -54,7 +54,7 @@ public:
     void showOutOfSyncWarning(bool fShow);
 
 private:
-    DiosysUI *gui;
+    DiosysGUI *gui;
     ClientModel *clientModel;
     WalletModel *walletModel;
 

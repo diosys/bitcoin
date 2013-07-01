@@ -1,5 +1,5 @@
-#ifndef DIOSYSUI_H
-#define DIOSYSUI_H
+#ifndef DIOSYSGUI_H
+#define DIOSYSGUI_H
 
 #include <QMainWindow>
 #include <QSystemTrayIcon>
@@ -33,25 +33,25 @@ class QAction;
 QT_END_NAMESPACE
 
 /**
-  DiosysGUI main class. This class represents the main window of the dDiosysI. It communicates with both the client and
+  Diosys GUI main class. This class represents the main window of the Diosys UI. It communicates with both the client and
   wallet models to give the user an up-to-date view of the current core state.
 */
-class DiosysUI : public QMainWindow
+class DiosysGUI : public QMainWindow
 {
     Q_OBJECT
 
 public:
     static const QString DEFAULT_WALLET;
 
-    explicit DiosysUI(bool fIsTestnet = false, QWidget *parent = 0);
-    ~DiosysUI();
+    explicit DiosysGUI(bool fIsTestnet = false, QWidget *parent = 0);
+    ~DiosysGUI();
 
     /** Set the client model.
         The client model represents the part of the core that communicates with the P2P network, and is wallet-agnostic.
     */
     void setClientModel(ClientModel *clientModel);
     /** Set the wallet model.
-        The wallet model represents a diosyswallet, and offers access to the list of transactions, address book and sending
+        The wallet model represents a diosys wallet, and offers access to the list of transactions, address book and sending
         functionality.
     */
 
@@ -195,4 +195,4 @@ private slots:
     void detectShutdown();
 };
 
-#endif // DIOSYSUI_H
+#endif // DIOSYSGUI_H

@@ -1,21 +1,21 @@
-#ifndef DIOSYSNITS_H
-#define DIOSYSNITS_H
+#ifndef DIOSYSUNITS_H
+#define DIOSYSUNITS_H
 
 #include <QString>
 #include <QAbstractListModel>
 
-/** Diosysunit definitions. Encapsulates parsing and formatting
+/** Diosys unit definitions. Encapsulates parsing and formatting
    and serves as list model for drop-down selection boxes.
 */
-class Diosysnits: public QAbstractListModel
+class DiosysUnits: public QAbstractListModel
 {
     Q_OBJECT
 
 public:
-    explicit Diosysnits(QObject *parent);
+    explicit DiosysUnits(QObject *parent);
 
-    /** Diosysunits.
-      @note Source: https://en.diosysit/wiki/Units . Please add only sensible ones
+    /** Diosys units.
+      @note Source: https://en.diosys.it/wiki/Units . Please add only sensible ones
      */
     enum Unit
     {
@@ -64,8 +64,8 @@ public:
     ///@}
 
 private:
-    QList<Diosysnits::Unit> unitlist;
+    QList<DiosysUnits::Unit> unitlist;
 };
-typedef Diosysnits::Unit dDiosysit;
+typedef DiosysUnits::Unit DiosysUnit;
 
-#endif // DIOSYSNITS_H
+#endif // DIOSYSUNITS_H
